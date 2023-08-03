@@ -1,0 +1,21 @@
+{
+    "database": "SysMd",
+    "tablespace": "ClipData",
+    "path_program_default": "C:\\ProgramData\\SysMd\\ClipMd\\Data",
+    "path_user_data_default": "C:\\Users\\CURRENT_USER\\AppData\\Local\\SysMD\\ClipMd\\Data",
+    "path_program_data_default": "C:\\ProgramData\\SysMd\\ClipMd\\Data",
+    "user": "<auth>",
+    "role": "Clipboard",
+    "comment": "The role Clipboard is used to be distinct from the user and postress.",
+    "bytea_output" : "SET bytea_output = 'hex'",
+    "Program": "",
+    "ProgramData": "mkidr C:\\ProgramData\\SysMd\\ClipMd\\Data",
+    "UserData": "mkdir C:\\Users\\david\\AppData\\Local\\SysMD\\ClipMd\\Data"
+}
+PGOPTIONS="-c 'custom.some_string=${SOME_STRING}'"
+set db.beta = 'Stored in env variable';
+postgresql.conf
+Note: the dot (.) in the name is important.
+Then retrieve the value using current_setting:
+SELECT current_setting('custom.some_string');
+psql -v variable_name=“$ENV_VARIABLE” and then using it within scripts as :variable_name

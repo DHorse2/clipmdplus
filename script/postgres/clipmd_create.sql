@@ -1,0 +1,13 @@
+--
+-- \i clipmd_create_role.sql
+-- \i clipmd_create_tablespace.sql
+-- \i clipmd_create_db.sql
+-- \i clipmd_create_table.sql
+-- \i clipmd_create_index.SQL
+
+-- commands:
+-- psql -f thefile.sql targetdatabase
+-- psql -f clipmd_create_role.sql SysMd
+-- psql -f clipmd_create_db.sql  SysMd
+-- psql -f clipmd_create_table.sql SysMd
+-- psql -f clipmd_create_index.SQL SysMd
