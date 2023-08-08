@@ -1,4 +1,4 @@
--- ! todo
+-- todo review OS and Db users, auth and roles
 CREATE ROLE Clipboard
 
 -- CREATE ROLE name [ [ WITH ] option [ ... ] ]

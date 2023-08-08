@@ -1,4 +1,4 @@
--- ! todo
+--  todo Analisis and create index creation script
 
 -- -- Simple create index:
 -- postgres=# create index tab_idx2 on scott.customer(emp_name);

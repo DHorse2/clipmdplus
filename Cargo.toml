@@ -1,85 +1,21 @@
-[package]
-name = "clipmdplus"
+[workspace]
+members = [
+    "clipmdplus", 
+    "clipmdplusmacro"
+]
+
+[workspace.package]
 version = "0.1.0"
 authors = ["David G Horsman <david_horsman@hotmail.com>"]
-edition = "2021"
-# documentation = "https://docs.rs/kbil"
-# readme = "README.md"
-#repository = ?
-# license = "PROPRIETARY"
-license-file = "clipmdplus_license.txt"
-keywords = ["clipboard", "copy", "cut", "paste", "clippings", "ETL", "Windows", "Linux"]
-exclude = [
-    "target",
-    "CHANGELOG.md",
-    "image.png",
-    "Cargo.lock",
-]
+description = "clipboard with history and catagories"
+documentation = "https://example.com/clipmdplus"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[workspace.dependencies]
+clipmdplus = { version = "0.1.0", path = "./clipmdplus" }
+clipmdplusmacro = { version = "0.1.0", path = "./clipmdplusmacro" }
 
-[dependencies]
-blob = "0.3.0"
-chrono = {version = "0.4.23", features = ["serde"]}
-derive_more = "0.99.17"
-# UI start.
-egui = { version = "0.22.0"} 
-# , features = ["provide_any"] }
-eframe = "0.22.0"
-# egui_web = "0.17.0"
-# UI end.
-libc = "0.2.141"
-postgres = "0.19.4"
-# http / json
-reqwest = {version = "0.11.18", features = ["json"]}
-# Serialization
-serde = {version = "1.0.160", features = ["derive"]}
-serde_json = "1.0.96"
-# System
-sled = "0.34.6"
-sys = "0.0.0"
-thiserror = "1.0.40"
-# async
-tokio = { version = "1.28.2", features = ["full"] }
-# Windows:# OS
-[dependencies.windows]
-version = "0.48"
-features = [
-    "Data_Xml_Dom",
-    "Win32_Foundation",
-    "Win32_Security",
-    "Win32_System_Threading",
-    "Win32_UI_WindowsAndMessaging",
-]
-[dependencies.windows-sys]
-version = "0.48"
-features = [
-    "Win32_Foundation",
-    "Win32_Security",
-    "Win32_System_Threading",
-    "Win32_UI_WindowsAndMessaging",
-]
-# Development:
-[dev-dependencies]
 
-# [maybe]
-# Command-line argument parsing 	clap = "2.25.0" 	📖 **
-# Global initialization 	lazy_static = "0.2.8" 	📖
-# Random numbers 	rand = "0.3.15" 	📖
-# Tar archives 	tar = "0.4.23" 	📖
-# Temporary directories 	tempdir = "0.3.5" 	📖
-# Thread pool 	threadpool = "1.4.0" 	📖
-# Configuration files 	toml = "0.4.2" 	📖
-# URLs 	url = "1.5.1" 	📖
-# Directory traversal 	walkdir = "1.0.7" 	📖
-
-# [Unused]
-# ansi_escapes = "0"
-# ansi_escape = "0"
-# local-ip-address = "0.5.1"
-# whoami = "1.4.0"
-# sys = "0"
-# term_cursor = "0.2.1"
-# mtermion = { path = "..\\mtermion_2.0.1" }
-# mtermion = { path = "G:\\KBil23\\Code\\Vs\\Vs0\\mtermion_2.0.1" }
-# extra = "0.1.0"
+[workspace.metadata.webcontents]
+root = "path/to/webproject"
+tool = ["npm", "run", "build"]
+#

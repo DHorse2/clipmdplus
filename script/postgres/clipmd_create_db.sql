@@ -5,7 +5,7 @@
 -- postgres=# 
 create database "SysMd" with tablespace ClipMd;
 
--- ! todo
+-- todo define create database script
 -- CREATE DATABASE
 -- postgres#
 -- CREATE DATABASE "SysMd"
