@@ -1,48 +1,19 @@
-// ClipForm clip_form.rs
+// ClipForm clip_form mod.rs
+/// ClipForm main module
+/// uses clipboard history data
+/// actual forms are in crate specific modules
+/// the only one so far is:
+///     egui
+/// although I'm been looking at several.
 #[allow(dead_code, unused, unused_imports)] // object creation (pre debug)
 //
 extern crate chrono;
 extern crate libc;
-extern crate sys;
-//
-// use serde::{
-//     Deserialize, Serialize,
-// };
-// use std::env;
-// use std::env::consts::*;
-// use std::error::Error;
 use std::fmt; 
-// use std::fs::File;
-//
-// use std::io::prelude::*;
-// use std::io::{
-    // Error,
-    // ErrorKind,
-    // self, 
-    // BufReader, 
-    // Read,
-    // Result, 
-    // Write, 
-// };
-// use std::os::windows::prelude::*;
-// use std::path::PathBuf;
-// use std::process;
 use std::str;
-use crate::UiType;
-// use std::thread;
-//
-// (see chrono below)
-// use std::time::{ 
-//     Duration, 
-//     Instant,
-//     SystemTime
-// };
-//
-// use crate::clip_form::egui::native:
-// use crate::clip_form::egui::native::FormWindow;
-// use crate::clip_form::egui::native::WindowOptions;
-use crate::clip_form::egui::native::ClipFormEgui;
 
+use crate::UiType;
+use crate::clip_form::egui::native::ClipFormEgui;
 use crate::clip_util::ClipMeta;
 // use crate::clip_util::ClipboardMeta;
 use crate::clip_util::ProgControl;

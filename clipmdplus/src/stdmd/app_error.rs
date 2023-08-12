@@ -3,9 +3,14 @@
 // UiError
 // DbError
 // !------------------------------------------------------------
-use derive_name::Name; // Trait
-use derive_name::Named;
-use derive_name::VariantName;
+extern crate serde;
+extern crate clipmdplus_macro;
+
+// use clipmdplus_macro::Name;
+// use clipmdplus_macro::VariantName;
+// use clipmdplus_macro::Deserialize_enum;
+// use clipmdplus_macro::Serialize_enum;
+
 // use derive_more::Display;
 // use derive_more::From;
 //
@@ -25,6 +30,22 @@ use serde::Deserialize;
 use std::fmt;
 //
 // use thiserror::Error as ErrorDerive;
+//
+// use self::Names;
+// use self::VariantNames;
+// use self::Deserialize_enum;
+// use self::Serialize_enum;
+
+use clipmdplus_macro::Names;
+use clipmdplus_macro::VariantNames;
+use clipmdplus_macro::Deserialize_enum;
+use clipmdplus_macro::Serialize_enum;
+
+// use super::super::Names;
+// use super::super::VariantNames;
+// use super::super::Deserialize_enum;
+// use super::super::Serialize_enum;
+//
 // !------------------------------------------------------------
 // Error data structs and enums
 include!(".\\app_error_data.rs");
@@ -34,7 +55,8 @@ pub struct PhantomError;
 // APPLICATION and GUI
 // !------------------------------------------------------------
 // #[derive(Debug, Deserialize, Serialize)]
-#[derive(Debug, derive_more::Display, thiserror::Error, derive_name::VariantName, serde_enum::Deserialize_enum, serde_enum::Serialize_enum,  /* */ )]
+#[derive(Debug, derive_more::Display, thiserror::Error, VariantNames, Deserialize_enum, Serialize_enum,  /* */ )]
+// #[doc(hidden)]
 pub enum AppError {
     DbError,
     UiError,
@@ -42,7 +64,7 @@ pub enum AppError {
 }
 // !------------------------------------------------------------
 // #[derive(Debug, Deserialize, Serialize)] // ErrorDerive, 
-#[derive(Debug, derive_more::Display, thiserror::Error, derive_name::VariantName, serde_enum::Deserialize_enum, serde_enum::Serialize_enum,  /* */ )]
+#[derive(Debug, derive_more::Display, thiserror::Error, VariantNames, Deserialize_enum, Serialize_enum,  /* */ )]
 pub enum GuiError {
     InvalidInput,
     InvalidConversion,
@@ -58,8 +80,8 @@ pub enum GuiError {
 // todo #[derive(Debug, Deserialize, Serialize)] 
 // todo thiserror::Error, 
 // #[derive(Deserialize_enum, Serialize_enum,  /* */ )]
-// #[derive(Debug, derive_more::Display, thiserror::Error, derive_name::VariantName, serde_enum::Deserialize_enum, serde_enum::Serialize_enum,  /* */ )]
-#[derive(Clone, derive_more::Display, thiserror::Error, derive_more::From, derive_name::VariantName, serde::Deserialize, serde::Serialize,  /* */ )]
+// #[derive(Debug, derive_more::Display, thiserror::Error, derive_name::VariantNames, serde_enum::Deserialize_enum, serde_enum::Serialize_enum,  /* */ )]
+#[derive(Clone, derive_more::Display, thiserror::Error, derive_more::From, VariantNames, serde::Deserialize, serde::Serialize,  /* */ )]
 pub enum DbError {
     // #[error("database client error {DbErrorDataClient::Name}")]
     // Client(#[from] DbErrorDataClient),
@@ -106,7 +128,7 @@ pub enum DbError {
 // Implement std::convert::From for AppError; from io::Error
 impl From<std::io::Error> for DbError {
     fn from(error: std::io::Error) -> Self {
-        DbError::StdIoError(DbErrorDataIo { data: error.to_string().as_bytes() })
+        DbError::StdIoError(DbErrorDataIo(error.to_string().as_bytes()))
         // {
             // message: error.to_string(),
             // kind: String::from("io"),
@@ -148,7 +170,7 @@ impl fmt::Debug for DbError {
 // #[derive(thiserror::Error, Deserialize, Serialize)] 
 
 // #[derive(thiserror::Error, derive_name::VariantName, serde_enum::Deserialize_enum, serde_enum::Serialize_enum,  /* */ )]
-#[derive(Clone, derive_more::Display, thiserror::Error, derive_more::From, derive_name::VariantName, serde::Deserialize, serde::Serialize,  /* */ )]
+#[derive(Clone, derive_more::Display, thiserror::Error, derive_more::From, VariantNames, serde::Deserialize, serde::Serialize,  /* */ )]
 pub enum JsonError {
     #[error("parsing error {0:?}")]
     Parsing(String),

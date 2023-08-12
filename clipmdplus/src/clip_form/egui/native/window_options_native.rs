@@ -1,5 +1,5 @@
 // window_options.rs
-
+/// Form Window Options and widget - egui eframe vs
 #[derive(Clone, PartialEq)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub struct WindowOptions {
@@ -35,11 +35,12 @@ impl Default for WindowOptions {
 
 impl WindowOptions {
     // from super::Demo for 
+    /// Window Name
     #[allow(dead_code, unused_variables, unused_imports)] // object creation (pre debug)
     fn name(&self) -> &'static str {
         "🗖 Window Options"
     }
-
+    /// Window Show
     #[allow(dead_code, unused_variables, unused_imports)] // object creation (pre debug)
     fn show(&mut self, ctx: &egui::Context, open: &mut bool) {
         let Self {
@@ -80,6 +81,7 @@ impl WindowOptions {
 
 impl WindowOptions {
     // from super::View for 
+    /// Window Ui layout definition
     #[allow(dead_code, unused_variables, unused_imports)] // object creation (pre debug)
     fn ui(&mut self, ui: &mut egui::Ui) {
         let Self {

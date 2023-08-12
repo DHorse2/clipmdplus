@@ -1,5 +1,10 @@
 // clip_form egui native.rs
-//
+/// Egui Native implimentation
+/// Defined:
+///     clip_form_native
+///     clip_form_window_native
+///     window_options_native.rs
+/// Status: Opens with a "hello world"
 #[allow(dead_code, unused, unused_imports)] 
     // object creation (pre debug)
     // also seems to be needed for API's

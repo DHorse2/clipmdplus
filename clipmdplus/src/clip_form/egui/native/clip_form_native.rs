@@ -1,9 +1,10 @@
 // Clip_form equi native clip_form.native.rs
-
+/// ClipForm using the Egui Native UI crate
 #[derive(Default)]
 pub struct ClipFormEgui {}
 
 impl ClipFormEgui {
+    /// Create a new egui window using eframe
     pub fn run() -> WindowResult  {
         let native_options = eframe::NativeOptions::default();
         let eframe_result = eframe::run_native("My egui App", native_options, Box::new(|cc| Box::new(ClipFormEgui::new(cc))));
@@ -17,7 +18,7 @@ impl ClipFormEgui {
         }
         // Ok("???")
     }
-    
+    /// Create a new egui window from a CreationContext using eframe
     #[allow(dead_code, unused_variables, unused_imports)] // object creation (pre debug)
     pub fn new(cc: &eframe::CreationContext<'_>) -> Self {
         // Customize egui here with cc.egui_ctx.set_fonts and cc.egui_ctx.set_visuals.
@@ -29,6 +30,7 @@ impl ClipFormEgui {
 }
 
 impl eframe::App for ClipFormEgui {
+    /// Update the egui eframe window
     #[allow(dead_code, unused_variables, unused_imports)] // object creation (pre debug)
    fn update(&mut self, ctx: &egui::Context, frame: &mut eframe::Frame) {
        egui::CentralPanel::default().show(ctx, |ui| {

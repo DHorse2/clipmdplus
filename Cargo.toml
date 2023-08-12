@@ -1,21 +1,49 @@
+## clipmdplus crate
 [workspace]
+##! ### Clipboard crates
 members = [
+##! ### Clipboard library
     "clipmdplus", 
-    "clipmdplusmacro"
+##! ### Macros
+    "clipmdplus_macro",
+##! ### Libary
+    "clipmdplus_library",
+##! ### Derive More Extension
+    "derive_more"
 ]
 
+##! Workspace details
+### The foo feature enables the `foo` functions
 [workspace.package]
 version = "0.1.0"
 authors = ["David G Horsman <david_horsman@hotmail.com>"]
 description = "clipboard with history and catagories"
 documentation = "https://example.com/clipmdplus"
 
+##! Dependencies
 [workspace.dependencies]
-clipmdplus = { version = "0.1.0", path = "./clipmdplus" }
-clipmdplusmacro = { version = "0.1.0", path = "./clipmdplusmacro" }
+### Clipboard library and form
+clipmdplus = { version = "0.1.0", workspace = true, path = "./clipmdplus" }
+### Macros
+clipmdplus_macro = { version = "0.1.0", workspace = true, path = "./clipmdplus_macro" }
+### Traits
+clipmdplus_library = { version = "0.1.0", workspace = true, path = "./clipmdplus_library" }
+### Derive-More Extended (Wrapped sort of)
+derive_more = { version = "0.99.17", workspace = true, path = "./derive_more" }
 
+document-features = "0.2.7"
 
-[workspace.metadata.webcontents]
-root = "path/to/webproject"
-tool = ["npm", "run", "build"]
+##! Web interface
+# [workspace.metadata.webcontents]
+### not implemented
+# root = "path/to/webproject"
+# tool = ["npm", "run", "build"]
+
+[workspace.metadata.docs.rs]
+features = ["document-features"]
+
+[workspace.metadata.features]
+Name = []
+VariantName = []
+ToString = []
 #

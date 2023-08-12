@@ -1,16 +1,17 @@
 // form_window.rs
-
+/// The Form Window layout definition
 #[derive(Clone, Default, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
 // #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub struct FormWindow {}
 
 impl FormWindow {
     // super::Demo for 
+    /// Window Name
     #[allow(dead_code, unused_variables, unused_imports)] // object creation (pre debug)
     fn name(&self) -> &'static str {
         "🗖 Window With Panels"
     }
-
+    /// Window Show
     #[allow(dead_code, unused_variables, unused_imports)] // object creation (pre debug)
     fn show(&mut self, ctx: &egui::Context, open: &mut bool) {
         // use super::View as _;
@@ -25,6 +26,7 @@ impl FormWindow {
 
 impl FormWindow {
     // from super::View for 
+    /// windwo Ui window layout definition
     #[allow(dead_code, unused_variables, unused_imports)] // object creation (pre debug)
     fn ui(&mut self, ui: &mut egui::Ui) {
         // Note that the order we add the panels is very important!

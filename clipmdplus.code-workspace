@@ -8,7 +8,8 @@
 		"rust-analyzer.linkedProjects": [
 			".\\Cargo.toml",
 			".\\Cargo.toml",
-			".\\Cargo.toml"
+			".\\Cargo.toml",
+			".\\clipmdplus_library\\Cargo.toml"
 		]
 	}
 }

@@ -66,11 +66,11 @@ use std::time::SystemTime;
 // use std::error::Error;
 //
 // use crate::stdmd::{self, db_api::*};
-use crate::stdmd::{self, DbType};
-use crate::stdmd::DbApi;
-use crate::stdmd::DbCrud;
+use crate::DbApi;
+use crate::DbType;
+use crate::DbCrud;
 // use crate::stdmd::db_api::DbError;
-use crate::stdmd::DbJson;
+use crate::DbJson;
 // use crate::stdmd::db_api::JsonError;
 
 // todo what is the syntax here: multi-line use

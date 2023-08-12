@@ -27,8 +27,8 @@ pub use self::range::*;
 pub mod sequence; // romove?
 pub use self::sequence::*;
 // #[macro_use]
-// pub mod serde_enum_local;
-// pub use self::serde_enum_local::*;
+// pub mod serde_enum;
+// pub use self::serde_enum::*;
 // !------------------------------------------------------------
 // !------------------------------------------------------------
 // (function pointers)
