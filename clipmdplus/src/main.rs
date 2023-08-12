@@ -168,28 +168,41 @@
 //! [`Constructor`]: https://dhorse2.github.io/clipmdplus/clipmdplus/constructor.html
 //! [`IsVariant`]: https://dhorse2.github.io/clipmdplus/clipmdplus/is_variant.html
 //! [`Unwrap`]: https://dhorse2.github.io/clipmdplus/clipmdplus/unwrap.html
+
+#![cfg_attr(
+    feature = "document-features",
+    cfg_attr(doc, doc = ::document_features::document_features!())
+)]
 // #![doc = document_features::document_features!()]
 #![warn(missing_docs)]
+
+// !------------------------------------------------------------
 // extern crate clipmdplus;
 // extern crate clipmdplus_library;
-// extern crate clipmdplus_macro;
-// !------------------------------------------------------------
 // #[macro_use]
+// extern crate clipmdplus_macro;
+// extern crate derive_more;
+// !------------------------------------------------------------
+#[allow(unused_macros)]
+#[macro_use]
 extern crate clipmdplus_macro;
 pub use clipmdplus_macro::Name;
 pub use clipmdplus_macro::Names;
 pub use clipmdplus_macro::NamingStyle;
 pub use clipmdplus_macro::VariantName;
 pub use clipmdplus_macro::VariantNames;
-// pub use clipmdplus_macro::*;
+// 
 pub use clipmdplus_macro::Deserialize_enum;
 pub use clipmdplus_macro::Serialize_enum;
 // use clipmdplus_macro::ToString;
-// use clipmdplus_macro::Names;
-// use clipmdplus_macro::VariantNames;
 
-extern crate clipmdplus_library;
+// extern crate clipmdplus_library;
 pub use clipmdplus_library::*;
+
+#[allow(unused_macros)]
+#[macro_use]
+extern crate derive_more;
+pub use derive_more::*;
 
 pub mod clip_util;
 pub use self::clip_util::*;

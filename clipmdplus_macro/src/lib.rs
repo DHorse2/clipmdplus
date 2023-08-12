@@ -19,11 +19,16 @@
 //! use clipmdplus_macro::VariantName;
 //!
 
+// #[doc = document_features::document_features!()]
+// #![doc = crate::document_features::document_features!()]
+#![warn(missing_docs)]
+
+// extern crate document_features;
+// use document_features::document_features;
+// use crate::document_features::document_features;
+
 // pub extern crate document_features;
 // use document_features::document_features;
-
-// #![doc = document_features::document_features!()]
-// #[doc = document_features::document_features!()]
 
 // #[macro_use]
 extern crate proc_macro;
@@ -32,7 +37,6 @@ extern crate proc_macro;
 use lazy_static::lazy_static;
 // proc_macro
 use proc_macro::TokenStream;
-// RUSTFLAGS='--cfg procmacro2_semver_exempt' cargo build
 use proc_macro2::TokenStream as TokenStream2;
 use quote::quote;
 // serde_enum
@@ -40,30 +44,34 @@ use std::collections::HashMap;
 // use syn::*;
 use syn::{self, parse_quote, Arm, Data};
 use syn::{Attribute, DataEnum, DeriveInput, Expr, ExprLit, ExprParen, Fields, Lit, parse2, parse_macro_input, Variant}; // path, tokens, Token, 
-// use std::fmt;
-// use std::io::prelude::*;
-// use std::net;
 
 // ! serde_enum ------------------------------------------------------------
-mod serde_enum;
+// mod serde_enum;
 // #[macro_use]
 //  pub mod serde_enum;
 //  pub use self::serde_enum::*;
-//  include!(".\\serde_enum.rs");
+ include!(".\\serde_enum.rs");
 
 // ! derive_name ------------------------------------------------------------
-extern crate derive_more;
-use derive_more::*;
+// mod derive_name;
+// #[macro_use]
+//  pub mod derive_name;
+//  pub use self::derive_name::*;
+ include!(".\\derive_name.rs");
+
+// ! derive_more ------------------------------------------------------------
+// extern crate derive_more;
+// use derive_more::*;
 //  pub mod derive_more;
 //  pub use self::derive_more::*;
 // include!(".\\derive_more.rs");
 
 // ! derive_name_trait ------------------------------------------------------------
-extern crate clipmdplus_library;
-use clipmdplus_library::*;
-//  pub mod clipmdplus_library;
-//  pub use self::clipmdplus_library::*;
-// include!(".\\clipmdplus_library.rs");
+// extern crate derive_name_trait;
+// use derive_name_trait::*;
+//  pub mod derive_name_trait;
+//  pub use self::derive_name_trait::*;
+// include!(".\\derive_name_trait.rs");
 
 // ! msequence ------------------------------------------------------------
 // From termion Create a CSI-introduced sequence.

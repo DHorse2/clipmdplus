@@ -45,7 +45,13 @@
 /// fn create_to_str_arms(target: &DataEnum, n: NamingStyle) -> impl Iterator<Item = TokenStream2> {
 /// fn create_de_arms(target: &DataEnum, n: NamingStyle) -> impl Iterator<Item = TokenStream2> {
 ///
-/// NamingStyle and NAME_MAP
+
+// ! Crates -------------------------------------------------------
+// NamingStyle and NAME_MAP
+// serde_enum
+// use std::collections::HashMap;
+// use syn::*;
+// use syn::{Attribute, DataEnum, DeriveInput, Expr, ExprLit, ExprParen, Fields, Lit, parse2, parse_macro_input, Variant}; // path, tokens, Token, 
 #[derive(Debug, derive_more::Display, Clone, Copy, PartialEq, Eq, Hash)]
 enum NamingStyle {
     SnakeCase,

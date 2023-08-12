@@ -25,7 +25,7 @@ name = "clipmdplus_library"
 # path = "src/lib.rs"
 # crate-type = ["proc-macro"]
 # crate-type = ["cdylib", "rlib"]
-proc-macro = true
+# proc-macro = true
 
 [features]
 ## default = ["console_error_panic_hook"]

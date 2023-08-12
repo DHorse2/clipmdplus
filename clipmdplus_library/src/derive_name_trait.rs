@@ -8,10 +8,10 @@
 /// ```
 /// use derive_name::Name;
 ///
-/// #[derive(Name)]
+/// #[derive(Names)]
 /// struct Alice;
 ///
-/// #[derive(Name)]
+/// #[derive(Names)]
 /// enum Bob {}
 ///
 /// assert_eq!(Alice::name(), "Alice");
@@ -52,7 +52,7 @@
 // !------------------------------------------------------------
 // pub use derive_name::{Name, VariantName};
 extern crate clipmdplus_macro;
-pub use clipmdplus_macro::{Name, VariantName};
+pub use clipmdplus_macro::{Names, VariantNames};
 
 pub trait Name {
     fn name() -> &'static str;
@@ -77,10 +77,10 @@ mod as_function {
     // use super::Name;
     // use crate as derive_name;
 
-    #[derive(Name)]
+    #[derive(Names)]
     struct Struct;
 
-    #[derive(Name)]
+    #[derive(Names)]
     enum Enum {}
 
     #[test]
@@ -115,7 +115,7 @@ mod variant_name {
     // use super::VariantName;
     // use crate as derive_name;
 
-    #[derive(clipmdplus_macro::VariantName)]
+    #[derive(clipmdplus_macro::VariantNames)]
     enum Enum {
         Alice,
         Bob(i32),
