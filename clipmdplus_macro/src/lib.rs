@@ -33,13 +33,15 @@
 // #[macro_use]
 extern crate proc_macro;
 //
-// derive_name
+// derive_name macros
 use lazy_static::lazy_static;
 // proc_macro
 use proc_macro::TokenStream;
 use proc_macro2::TokenStream as TokenStream2;
 use quote::quote;
-// serde_enum
+use quote::TokenStreamExt;
+
+// serde_enum macros
 use std::collections::HashMap;
 // use syn::*;
 use syn::{self, parse_quote, Arm, Data};

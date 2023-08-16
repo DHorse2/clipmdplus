@@ -4,9 +4,9 @@
 /// Provides simple syntax to the item and variant names.
 /// 
 /// proc_macro_derive:
-///     use super::super::Names;
-///     use super::super::VariantNames;
-///     use clipmdplus_macro::VariantNames;
+///     use super::super::Name;
+///     use super::super::VariantName;
+///     use clipmdplus_macro::VariantName;
 /// traits:
 ///     Name
 ///     Named for T
@@ -18,31 +18,44 @@
 // use quote::quote;
 // use syn::{self, parse_quote, Arm, Data};
 
-/// Names
+/// Name
 #[allow(unused_macros)]
-#[proc_macro_derive(Names)]
-// #[macro_export]
+// #[proc_macro_export]
+#[proc_macro_derive(Name)]
 pub fn names(input: TokenStream) -> TokenStream {
     let ast: syn::DeriveInput = syn::parse_macro_input!(input);
     let ident = &ast.ident;
     let gen = quote! {
-        impl clipmdplus_macro::Name for #ident {
+        impl clipmdplus_library::NamedStruct for #ident {
             fn name() -> &'static str {
                 stringify!(#ident)
             }
         }
     };
+    eprintln!("{}", gen);
     gen.into()
 }
-/// VariantNames
+/// VariantName
 #[allow(unused_macros)]
-#[proc_macro_derive(VariantNames)]
 // #[macro_export]
+#[proc_macro_derive(VariantName)]
 pub fn variant(input: TokenStream) -> TokenStream {
     let ast: syn::DeriveInput = syn::parse_macro_input!(input);
-
+    let item_ident = &ast.ident;
+    
     if let Data::Enum(r#enum) = &ast.data {
         let ident = &ast.ident;
+        let gen_enum: TokenStream2 = quote! {
+            impl clipmdplus_library::NamedStruct for #ident {
+                fn name() -> &'static str {
+                    stringify!(#ident)
+                }
+            }
+        };
+        
+        // eprintln!("{}", gen);
+        // gen_e.<TokenStream2 as Into<T>>::into();
+
         let mut match_arms = Vec::<Arm>::with_capacity(r#enum.variants.len());
 
         for variant in r#enum.variants.iter() {
@@ -61,20 +74,28 @@ pub fn variant(input: TokenStream) -> TokenStream {
                 #match_pattern => stringify!(#variant_ident)
             });
         }
-        let gen = quote! {
-            // use clipmdplus_macro::Name;
-            impl clipmdplus_macro::VariantName for #ident {
-                fn variant_name(&self) -> &'static str {
+        let mut gen_variant = quote! {
+            impl clipmdplus_library::NamedVariant for #ident {
+                fn name(&self) -> &'static str {
                     match self {
                         #(#match_arms),*
                     }
                 }
             }
         };
-        gen.into()
+        // eprintln!("{}", gen);
+        gen_variant.append_all(gen_enum);
+        // let gen_out: TokenStream2 = format!("{:?}{:?}", gen_enum, gen_variant);
+        // let gen_out: TokenStream2 = syn::parse2(format!("{:?}{:?}", gen_enum, gen_variant));
+        // let gen_out: TokenStream2 = syn::parse2(gen_enum, gen_variant);
+        // let gen_out = syn::parse_str(format!("{:?}{:?}", gen_enum, gen_variant));
+        // eprintln!("{}", gen_out);
+        // gen_out.into()
+        eprintln!("{}", gen_variant);
+        gen_variant.into()
     } else {
         quote!(
-            compile_error!("Can only implement 'VariantName' on a enum");
+            compile_error!("Can only implement 'VariantName' on a enum. {} is not an enum", #item_ident);
         )
         .into()
     }

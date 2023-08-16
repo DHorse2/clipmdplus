@@ -1,5 +1,6 @@
 use super::*;
 
+#[allow(unused_variables)] 
 #[test]
 fn unit() {
     assert!(SimpleErr.source().is_none());

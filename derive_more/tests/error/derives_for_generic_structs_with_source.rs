@@ -1,5 +1,6 @@
 use super::*;
 
+#[allow(unused_variables)] 
 #[test]
 fn named_implicit_no_source() {
     derive_display!(TestErr, T);

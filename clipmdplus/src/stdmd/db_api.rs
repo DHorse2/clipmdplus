@@ -9,21 +9,32 @@
 //! pub type DbClientError = postgres::Error;
 /// 
 extern crate serde;
+use serde::Serialize;
+use serde::Deserialize;
+
+// #![allow(dead_code)]
 // #[macro_use]
+extern crate derive_more;
+use derive_more::From;
+
 // extern crate clipmdplus_macro;
 // use crate::clipmdplus_macro;
-// use super::VariantNames;
-// use super::super::VariantNames;
-use crate::clipmdplus_macro::Name;
-use crate::clipmdplus_macro::VariantNames;
-// use super::super::clipmdplus_macro::VariantNames;
+// use super::VariantName;
+// use super::super::VariantName;
+// use crate::clipmdplus_macro::Name;
+// use crate::clipmdplus_macro::VariantName;
+use clipmdplus_macro::Name;
+use clipmdplus_macro::VariantName;
+// use super::super::clipmdplus_macro::VariantName;
 
 /// ! DbType -------------------------------------------------
 /// DbType enumerates the chosen database to use
-#[derive(Clone, derive_more::From, VariantNames, serde::Deserialize, serde::Serialize,  /* */ )]
+// #[derive(Clone, Debug, VariantName, serde::Deserialize, serde::Serialize,  /* */ )] // derive_more::From, 
 // #[serde(rename_all = "snake_case")]
-// #[derive(Clone, derive_more::From, derive_name::VariantNames, serde_enum::ToString, serde_enum::Deserialize_enum, serde_enum::Serialize_enum,  /* */ )]
+// #[derive(Clone, derive_more::From, derive_name::VariantName, serde_enum::ToString, serde_enum::Deserialize_enum, serde_enum::Serialize_enum,  /* */ )]
 // , Serialize_enum_str, Deserialize_enum_str, )]
+// , From
+#[derive(Clone, Debug, From, Eq, Hash, Name, Ord, PartialEq, PartialOrd, VariantName, Deserialize, Serialize, /* ... */)]
 pub enum DbType {
     /// Json.
     // #[serde(rename = "Json")]
@@ -47,7 +58,7 @@ pub enum DbType {
     None
 }
 impl DbType {
-    fn as_str(&self) -> &str { &self.enum_name()}
+    fn as_str(&self) -> &str { &self.name() } // .enum_name()}
 }
 /// ! DpApi -------------------------------------------------------
 /// <DbClient> <DbRow> DbApi DbCrud
@@ -63,7 +74,7 @@ pub trait DbApi {
     type DbClientError;
 
     fn db_connect() -> Result<Self::DbClient, Self::DbError>; // dyn postgres::Error
-    fn db_disconnect() -> Result<bool, Self::DbError>; // dyn postgres::Error
+    fn db_disconnect(client: Self::DbClient) -> Result<bool, Self::DbError>; // dyn postgres::Error
 
     fn db_execute(&self, client: Self::DbClient, query: &str, params: &[&(dyn postgres::types::ToSql + Sync)]) -> Result<u64, Self::DbClientError>;
 
@@ -97,13 +108,12 @@ pub trait DbJson {
     type JsonResult;
     fn to_json(&self) -> Self::JsonResult;
     fn from_json(json: &str) -> Self;
-    fn load_json(mut file_path: &mut str) -> Self 
+    fn load_json(file_path: &mut String) -> Self 
     where
         Self: Default,
     {
         if file_path.is_empty() {
-            file_path = std::string::String::from("ClipboardData.txt".as_bytes_mut());
-            // let mut file_path: &mut str = String::From("ClipboardData.txt");
+            file_path = &mut String::from("ClipboardData.txt");
         }
         let clip_json = std::fs::read_to_string(file_path).unwrap();
         if clip_json.is_empty() {
@@ -202,17 +212,17 @@ pub trait DbJson {
     // #[serde(other)]
 // Serialize_enum_strm, Deserialize_enum_str, )]
 // ! ClipMdPlus Macros -------------------------------------------------
-// #[derive(VariantNames)]
+// #[derive(VariantName)]
 // #[macro_use]
 // extern crate clipmdplus_macro;
 // pub use clipmdplus_macro::*;
 // (derive_name)
-// use clipmdplus_macro::Names;
-// use clipmdplus_macro::VariantNames;
+// use clipmdplus_macro::Name;
+// use clipmdplus_macro::VariantName;
 // (serde_enum)
 // use clipmdplus_macro::Deserialize_enum;
 // use clipmdplus_macro::Serialize_enum;
 // use clipmdplus_macro::ToString;
 //
-// use super::clipmdplus_macro::Names;
-// use super::clipmdplus_macro::VariantNames;
+// use super::clipmdplus_macro::Name;
+// use super::clipmdplus_macro::VariantName;

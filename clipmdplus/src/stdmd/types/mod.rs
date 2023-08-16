@@ -20,12 +20,16 @@ use std::any::TypeId;
 // !------------------------------------------------------------
 pub mod type_form; // romove?
 pub use self::type_form::*;
+
 pub mod type_format; // romove?
 pub use self::type_format::*;
+
 pub mod range; // romove?
 pub use self::range::*;
+
 pub mod sequence; // romove?
 pub use self::sequence::*;
+
 // #[macro_use]
 // pub mod serde_enum;
 // pub use self::serde_enum::*;
@@ -44,11 +48,18 @@ pub use self::sequence::*;
 // Metadata
 // shim unstable nightly feature
 // ?shadowing this?
-const fn type_name_of_val<T: ?Sized>(_: &T) -> &'static str {
+// error: `std::any::type_name` is not yet stable as a const fn
+//   --> clipmdplus\src\stdmd\types\mod.rs:48:5
+//    |
+// 48 |     type_name::<T>()
+//    |     ^^^^^^^^^^^^^^^^
+// 48 const fn type_name_of_val<T: ?Sized>(_: &T) -> &'static str {
+
+pub fn type_name_of_val<T: ?Sized>(_: &T) -> &'static str {
     type_name::<T>()
 }
 // Any
-const fn type_name_of<T>(_: &T) -> &'static str 
+pub fn type_name_of<T>(_: &T) -> &'static str 
 where
     T: Any,
     T: ?Sized
@@ -56,26 +67,28 @@ where
     format!("{}", std::any::type_name::<T>()).as_str()
 }
 
-const fn type_name_from_id<T: ?Sized + Any, I>(i: &TypeId) -> &'static str 
+pub fn type_name_from_id<T: ?Sized + Any, I>(i: &TypeId) -> &'static str 
 where
     I: ?Sized,
 {
-    r#"Does not reflect the RUST type system use of a unique id for each type.  
-    It's not available as a readable string"#
+    // r#"Does not reflect the RUST type system use of a unique id for each type.  
+    // It's not available as a readable string"#;
     // format!("{}", TypeId::of::<I>()).as_str()
     // TypeId::of::<I>().to_string()
     // TypeId::type_name::<T>
     // i.type_name::<I>()
-    // &TypeId::of::<i<T>>()
+    // &TypeId::of::<i<T>>().type_name()
+    let b: &'static str = i.type_id().type_name().to_string().as_str();
+    b
 }
 
-const fn type_of_val<T: ?Sized>(_: &T) -> &'static TypeId {
+pub fn type_of_val<T: ?Sized>(_: &T) -> &'static TypeId {
     &TypeId::of::<T>()
     // t.type_id()
 }
 //
 // Compare
-const fn type_is_equal<T: ?Sized, U: ?Sized>(_: &T, _: &U) -> bool {
+pub fn type_is_equal<T: ?Sized, U: ?Sized>(_: &T, _: &U) -> bool {
     TypeId::of::<T>() == TypeId::of::<U>()
 }
 // note on function pointers.

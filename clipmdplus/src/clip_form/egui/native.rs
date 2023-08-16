@@ -23,15 +23,17 @@
 //
 // pub mod form_window_native;
 //
-use crate::stdmd::types::UiType;
-// use crate::stdmd::types::UiError;
-// use crate::stdmd::types::UiResult;
-// use crate::stdmd::types::WindowType;
-use crate::stdmd::types::WindowError;
-use crate::stdmd::types::WindowResult;
 
-// use crate::clip_form::egui::native::FormWindow;
-// use crate::clip_form::egui::native::WindowOptions;
+use crate::stdmd;
+// use stdmd::UiType;
+// use stdmd::UiError;
+// use stdmd::UiResult;
+// use stdmd::WindowType;
+use stdmd::WindowError;
+use stdmd::WindowResult;
+
+// use clip_form::egui::native::FormWindow;
+// use clip_form::egui::native::WindowOptions;
 //
 // !------------------------------------------------------------
 include!(".\\native\\clip_form_native.rs");

@@ -18,7 +18,8 @@
 // !------------------------------------------------------------
 // ClipboardMeta
 // ! NOT IMPLEMENTED
-#[derive(Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize, /* ... */)]
+
+#[derive(Clone, Debug, From, Eq, Hash, Name, Ord, PartialEq, PartialOrd, Deserialize, Serialize, /* ... */)]
 pub struct ClipboardMeta {
     // todo!(); The clipboard metadata and history
     // Permissions
@@ -27,7 +28,7 @@ pub struct ClipboardMeta {
     // Sync Settings
     History: ClipboardHistory
 }
-#[derive(Clone, Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Deserialize, Serialize, /* ... */)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Name, Ord, PartialOrd, Deserialize, Serialize, /* ... */)]
 pub struct ClipboardHistory {
     // ClipboardHistory Vector
     /// History Vector
@@ -42,7 +43,7 @@ pub struct ClipboardHistory {
 // #[derive(Clone, Debug, Eq, serde::Deserialize, serde::Serialize)]
 // #[serde(rename_all = "PascalCase")] // NO (?maybe?)
 // #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
-#[derive(Clone, Debug, Eq, Hash, Ord, PartialOrd, Deserialize, Serialize, /* ... */)]
+#[derive(Clone, Debug, Eq, Hash, Name, Ord, PartialOrd, Deserialize, Serialize, /* ... */)]
 pub struct ClipMeta {
     /// Unique auto-generated key (compliant)
     /// (This would have a getter/setter and not be public)
@@ -150,7 +151,7 @@ impl DbApi for ClipMeta {
         // client?
         // Ok(client)
     }
-    fn db_disconnect() -> Result<bool, Self::DbError> { // dyn postgres::Error
+    fn db_disconnect(mut client: Self::DbClient) -> Result<bool, Self::DbError> { // dyn postgres::Error
         Ok(true)
     }
     fn db_execute(&self, mut client: Self::DbClient, query: &str, params: &[&(dyn ToSql + Sync)]) -> Result<u64, Self::DbClientError> {
@@ -160,7 +161,7 @@ impl DbApi for ClipMeta {
             )?;
             Ok(results)
     }
-    fn db_exists(&self, client: Self::DbClient) -> Result<bool, Self::DbError> { // dyn postgres::Error
+    fn db_exists(&self, mut client: Self::DbClient) -> Result<bool, Self::DbError> { // dyn postgres::Error
         Ok(true)
     }    
 }
@@ -170,7 +171,7 @@ impl DbCrud for ClipMeta {
     // type DbError = postgres::Error;
     type DbRow = postgres::row::Row;
     //
-    fn db_row_insert(&self, client: Self::DbClient) -> Result<u64, Self::DbError> {
+    fn db_row_insert(&self, mut client: Self::DbClient) -> Result<u64, Self::DbError> {
         let results = client.execute(
             "INSERT INTO clip_data (id_key, id_system, data_creation_time, data_processed, data_synced, sequence_number, data_type, clip_data, clip_i_data) VALUES VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
             &[
@@ -192,7 +193,7 @@ impl DbCrud for ClipMeta {
         // Ok(results)
         results
     }
-    fn db_row_delete(&self, client: Self::DbClient) -> Result<u64, Self::DbError> {
+    fn db_row_delete(&self, mut client: Self::DbClient) -> Result<u64, Self::DbError> {
         let results = client.execute(
             "INSERT INTO clip_data (id_key, id_system, data_creation_time, data_processed, data_synced, sequence_number, data_type, clip_data, clip_i_data) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
             &[
@@ -238,12 +239,12 @@ impl DbCrud for ClipMeta {
         }
     }
 
-    fn db_row_update(&self, client: Self::DbClient) -> Result<u64, Self::DbError> {
+    fn db_row_update(&self, mut client: Self::DbClient) -> Result<u64, Self::DbError> {
         // todo!() define db row update
         Ok(1)
     }
 
-    fn db_row_exists(&self, client: Self::DbClient) -> Result<bool, Self::DbError> {
+    fn db_row_exists(&self, mut client: Self::DbClient) -> Result<bool, Self::DbError> {
         // todo!() define db row exists
         Ok(true)
     }
@@ -259,7 +260,7 @@ impl DbJson for ClipMeta {
     fn from_json(json: &str) -> Self {
         serde_json::from_str(json).unwrap()
     }
-    fn load_json(mut file_path: &mut str) -> Self {
+    fn load_json(file_path: &mut String) -> Self {
         if file_path.is_empty() {
             let file_path = "ClipboardData.txt";
         }

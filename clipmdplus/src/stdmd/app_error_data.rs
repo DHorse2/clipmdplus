@@ -1,7 +1,8 @@
 // stdmd app_error_data.rs
 // no use (include)
 // !------------------------------------------------------------
-#[derive(Debug, Names, Deserialize, Serialize)]
+// #[derive(Debug, Name, Deserialize, Serialize)]
+#[derive(Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize, /* ... */)]
 pub struct DbErrorData {
      message: String,
      file: Option<String>,
@@ -12,7 +13,7 @@ pub struct DbErrorData {
 impl DbErrorData{
     pub fn new(message: &str) -> Self {
         DbErrorData {
-            message: message,
+            message: message.to_string(),
             file: None,
             line: None,
             column: None,
@@ -28,18 +29,25 @@ impl fmt::Display for DbErrorData {
 }
 // !------------------------------------------------------------
 // #[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize, /* ... */)]
 pub struct DbErrorDataIo ( DbErrorData );
 // #[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize, /* ... */)]
 pub struct DbErrorDataPostgres ( DbErrorData );
 // #[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize, /* ... */)]
 pub struct DbErrorDataStd ( DbErrorData );
 // #[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize, /* ... */)]
 pub struct DbErrorDataClient ( DbErrorData );
 // #[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize, /* ... */)]
 pub struct JsonErrorData ( DbErrorData );
 // #[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize, /* ... */)]
 pub struct DbErrorDataSer ( DbErrorData );
 // #[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize, /* ... */)]
 pub struct DbErrorDataDe ( DbErrorData );
 
 // !------------------------------------------------------------

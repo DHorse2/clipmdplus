@@ -66,11 +66,11 @@ use std::time::SystemTime;
 // use std::error::Error;
 //
 // use crate::stdmd::{self, db_api::*};
-use crate::DbApi;
-use crate::DbType;
-use crate::DbCrud;
+use crate::stdmd::DbApi;
+use crate::stdmd::DbType;
+use crate::stdmd::DbCrud;
 // use crate::stdmd::db_api::DbError;
-use crate::DbJson;
+use crate::stdmd::DbJson;
 // use crate::stdmd::db_api::JsonError;
 
 // todo what is the syntax here: multi-line use
@@ -93,6 +93,10 @@ use crate::stdmd::FormatType;
 use crate::stdmd::FormatList;
 use crate::stdmd::Range;
 use crate::stdmd::Sequence;
+
+use crate::clipmdplus_macro;
+use clipmdplus_macro::Name;
+use clipmdplus_macro::VariantName;
 // !------------------------------------------------------------
 // include!(".\\format.rs");
 // !------------------------------------------------------------

@@ -1,6 +1,8 @@
 // stdmd.rs standard functions
+
 pub mod date_std; // romove?
 pub use self::date_std::*;
+
 pub mod hyperlink;
 pub use self::hyperlink::*;
 

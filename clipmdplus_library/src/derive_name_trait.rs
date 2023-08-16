@@ -8,10 +8,10 @@
 /// ```
 /// use derive_name::Name;
 ///
-/// #[derive(Names)]
+/// #[derive(Name)]
 /// struct Alice;
 ///
-/// #[derive(Names)]
+/// #[derive(Name)]
 /// enum Bob {}
 ///
 /// assert_eq!(Alice::name(), "Alice");
@@ -47,41 +47,49 @@
 ///     Bob
 /// }
 ///
-/// assert_eq!(Alice::Bob.variant_name(), "Bob");
+/// assert_eq!(Alice::Bob.name(), "Bob");
 /// ```
 // !------------------------------------------------------------
 // pub use derive_name::{Name, VariantName};
 extern crate clipmdplus_macro;
-pub use clipmdplus_macro::{Names, VariantNames};
+// use clipmdplus_macro::{Name, VariantName};
 
-pub trait Name {
+pub trait NamedStruct {
     fn name() -> &'static str;
 }
 
 pub trait Named {
-    fn name(&self) -> &'static str;
+    fn named(&self) -> &'static str;
 }
 
-impl<T: Name> Named for T {
-    fn name(&self) -> &'static str {
+impl<T: NamedStruct> Named for T {
+    fn named(&self) -> &'static str {
         T::name()
     }
 }
 
-pub trait VariantName {
+pub trait NamedVariant {
     fn variant_name(&self) -> &'static str;
 }
 
 #[cfg(test)]
 mod as_function {
-    // use super::Name;
+    use super::*;
+    // use super::NamedStruct;
     // use crate as derive_name;
+    use crate::{self as clipmdplus_library};
+    extern crate clipmdplus_macro;
+    use clipmdplus_macro::Name;
 
-    #[derive(Names)]
+    #[derive(Name)]
     struct Struct;
 
-    #[derive(Names)]
-    enum Enum {}
+    #[derive(Name)]
+    enum Enum {
+        One,
+        Two,
+        Three
+    }
 
     #[test]
     fn test() {
@@ -92,30 +100,42 @@ mod as_function {
 
 #[cfg(test)]
 mod as_method {
-    // use super::Name;
+    // use super::NamedStruct;
     // use crate as derive_name;
+    use crate as clipmdplus_library;
+    extern crate clipmdplus_macro;
+    use clipmdplus_macro::Name;
+    use clipmdplus_macro::VariantName;
+    use clipmdplus_library::NamedStruct;
+    use clipmdplus_library::NamedVariant;
 
-    #[derive(clipmdplus_macro::Name)]
+    
+    #[derive(Name)]
     struct Struct;
 
-    #[derive(clipmdplus_macro::Name)]
+    #[derive(VariantName)]
     enum Enum {
         A,
     }
 
     #[test]
     fn test() {
-        assert_eq!(Struct.name(), "Struct");
-        assert_eq!(Enum::A.name(), "Enum");
+        assert_eq!(Struct::name(), "Struct");
+        assert_eq!(Enum::name(), "Struct");
+        assert_eq!(Enum::A.name(), "A");
     }
 }
 
 #[cfg(test)]
-mod variant_name {
-    // use super::VariantName;
+mod name {
+    // use super::NamedVariant;
     // use crate as derive_name;
+    use clipmdplus_macro::Name;
+    use clipmdplus_macro::VariantName;
+    use clipmdplus_library::NamedStruct;
+    use clipmdplus_library::NamedVariant;
 
-    #[derive(clipmdplus_macro::VariantNames)]
+    #[derive(VariantName)]
     enum Enum {
         Alice,
         Bob(i32),
@@ -124,8 +144,8 @@ mod variant_name {
 
     #[test]
     fn test() {
-        assert_eq!(Enum::Alice.variant_name(), "Alice");
-        assert_eq!(Enum::Bob(1).variant_name(), "Bob");
-        assert_eq!(Enum::Claire { i: 1 }.variant_name(), "Claire");
+        assert_eq!(Enum::Alice.name(), "Alice");
+        assert_eq!(Enum::Bob(1).name(), "Bob");
+        assert_eq!(Enum::Claire { i: 1 }.name(), "Claire");
     }
 }

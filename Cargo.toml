@@ -24,12 +24,12 @@ documentation = "https://example.com/clipmdplus"
 [workspace.dependencies]
 ### Clipboard library and form
 clipmdplus = { version = "0.1.0", workspace = true, path = "./clipmdplus" }
+### Derive-More Extended (Wrapped sort of)
+derive_more = { version = "0.99.17", workspace = true, path = "./derive_more" }
 ### Macros
 clipmdplus_macro = { version = "0.1.0", workspace = true, path = "./clipmdplus_macro" }
 ### Traits
 clipmdplus_library = { version = "0.1.0", workspace = true, path = "./clipmdplus_library" }
-### Derive-More Extended (Wrapped sort of)
-derive_more = { version = "0.99.17", workspace = true, path = "./derive_more" }
 
 document-features = "0.2.7"
 

@@ -1,13 +1,16 @@
 use super::*;
 
 derive_display!(TestErr);
+#[allow(dead_code, unused_variables)] 
 #[derive(Debug, Error)]
 enum TestErr {
     Unit,
     NamedImplicitNoSource {
+        #[allow(dead_code, unused_variables)] 
         field: i32,
     },
     NamedImplicitSource {
+        #[allow(dead_code, unused_variables)] 
         source: SimpleErr,
         field: i32,
     },

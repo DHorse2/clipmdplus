@@ -2,10 +2,10 @@
 // !------------------------------------------------------------
 #[derive(Clone, Debug, PartialEq)]
 pub enum UiType {
-EguiNative,
-EguiWeb,
-// Tauri,
-None
+    EguiNative,
+    EguiWeb,
+    // Tauri,
+    None
 }
 #[derive(Clone, Debug, PartialEq)]
 pub enum UiError {
@@ -33,6 +33,6 @@ pub type WindowResult = std::result::Result<String, WindowError>;
 // #[macro_use] extern crate enum_derive;
 // custom_derive! {
 //     #[derive(Debug, PartialEq, Eq,
-//         IterVariants(CandyVariants), IterVariantNames(CandyVariantNames))]
+//         IterVariants(CandyVariants), IterVariantName(CandyVariantName))]
 //     pub enum Candy { Musk, FruitRock, BoPeeps, LemonSherbert }
 // }

@@ -173,6 +173,7 @@
     feature = "document-features",
     cfg_attr(doc, doc = ::document_features::document_features!())
 )]
+
 // #![doc = document_features::document_features!()]
 #![warn(missing_docs)]
 
@@ -183,14 +184,14 @@
 // extern crate clipmdplus_macro;
 // extern crate derive_more;
 // !------------------------------------------------------------
+// #[allow(unused_imports)]
 #[allow(unused_macros)]
-#[macro_use]
 extern crate clipmdplus_macro;
+pub use clipmdplus_library::NamedStruct;
 pub use clipmdplus_macro::Name;
-pub use clipmdplus_macro::Names;
 pub use clipmdplus_macro::NamingStyle;
+pub use clipmdplus_library::NamedVariant;
 pub use clipmdplus_macro::VariantName;
-pub use clipmdplus_macro::VariantNames;
 // 
 pub use clipmdplus_macro::Deserialize_enum;
 pub use clipmdplus_macro::Serialize_enum;
@@ -199,8 +200,9 @@ pub use clipmdplus_macro::Serialize_enum;
 // extern crate clipmdplus_library;
 pub use clipmdplus_library::*;
 
-#[allow(unused_macros)]
-#[macro_use]
+// #[macro_use]
+// #[allow(unused_imports)]
+// #[allow(unused_macros)]
 extern crate derive_more;
 pub use derive_more::*;
 
@@ -215,7 +217,9 @@ pub use self::stdmd::*;
 
 #[tokio::main]
 pub async fn main() -> Result<(), reqwest::Error> {
-    println!("Hello, world!");
+    // trace_macros!(true);
+    // println!("Hello, world!");
+    // trace_macros!(false);
     let mut clip_form = clip_form::ClipForm::default();
     let mut ui_type = stdmd::types::UiType::EguiNative;
     let _clip_form_result = clip_form.run(&mut ui_type);
