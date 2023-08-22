@@ -91,6 +91,7 @@ These traits are used for converting a struct to a string in different ways.
    `LowerHex`, `UpperHex`, `LowerExp`, `UpperExp`, `Pointer`
 
 ### Error-handling traits
+
 These traits are used to define error-types.
 
 1. [`Error`]
@@ -104,12 +105,12 @@ These are traits that can be used for operator overloading.
 3. [`Not`-like], contains `Not` and `Neg`
 4. [`Add`-like], contains `Add`, `Sub`, `BitAnd`, `BitOr`, `BitXor`
 5. [`Mul`-like], contains `Mul`, `Div`, `Rem`, `Shr` and `Shl`
-3. [`Sum`-like], contains `Sum` and `Product`
-6. [`IndexMut`]
-7. [`DerefMut`]
-8. [`AddAssign`-like], contains `AddAssign`, `SubAssign`, `BitAndAssign`,
+6. [`Sum`-like], contains `Sum` and `Product`
+7. [`IndexMut`]
+8. [`DerefMut`]
+9. [`AddAssign`-like], contains `AddAssign`, `SubAssign`, `BitAndAssign`,
    `BitOrAssign` and `BitXorAssign`
-9. [`MulAssign`-like], contains `MulAssign`, `DivAssign`, `RemAssign`,
+10. [`MulAssign`-like], contains `MulAssign`, `DivAssign`, `RemAssign`,
    `ShrAssign` and `ShlAssign`
 
 ### Static methods
@@ -144,9 +145,13 @@ And this to the top of your Rust file for Rust 2018:
 extern crate derive_more;
 // use the derives that you want in the file
 use derive_more::{Add, Display, From};
+
 ```
+
 If you're still using Rust 2015 you should add this instead:
+
 ```rust
+
 extern crate core;
 #[macro_use]
 extern crate derive_more;

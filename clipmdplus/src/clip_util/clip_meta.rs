@@ -19,7 +19,7 @@
 // ClipboardMeta
 // ! NOT IMPLEMENTED
 
-#[derive(Clone, Debug, From, Eq, Hash, Name, Ord, PartialEq, PartialOrd, Deserialize, Serialize, /* ... */)]
+#[derive(Clone, Debug, From, Eq, Hash, Name, Ord, PartialEq, PartialOrd, Deserialize, Serialize)]
 pub struct ClipboardMeta {
     // todo!(); The clipboard metadata and history
     // Permissions
@@ -28,7 +28,7 @@ pub struct ClipboardMeta {
     // Sync Settings
     History: ClipboardHistory
 }
-#[derive(Clone, Debug, PartialEq, Eq, Hash, Name, Ord, PartialOrd, Deserialize, Serialize, /* ... */)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Name, Ord, PartialOrd, Deserialize, Serialize)]
 pub struct ClipboardHistory {
     // ClipboardHistory Vector
     /// History Vector
@@ -43,7 +43,7 @@ pub struct ClipboardHistory {
 // #[derive(Clone, Debug, Eq, serde::Deserialize, serde::Serialize)]
 // #[serde(rename_all = "PascalCase")] // NO (?maybe?)
 // #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
-#[derive(Clone, Debug, Eq, Hash, Name, Ord, PartialOrd, Deserialize, Serialize, /* ... */)]
+#[derive(Clone, Debug, Eq, Hash, Name, Ord, PartialOrd, Deserialize, Serialize)]
 pub struct ClipMeta {
     /// Unique auto-generated key (compliant)
     /// (This would have a getter/setter and not be public)
@@ -260,8 +260,9 @@ impl DbJson for ClipMeta {
     fn from_json(json: &str) -> Self {
         serde_json::from_str(json).unwrap()
     }
-    fn load_json(file_path: &mut String) -> Self {
-        if file_path.is_empty() {
+    // fn load_json(file_path: &mut String) -> Self {
+    fn load_json(mut file_path: String) -> Self {
+            if file_path.is_empty() {
             let file_path = "ClipboardData.txt";
         }
         let clip_json = std::fs::read_to_string(file_path).unwrap();

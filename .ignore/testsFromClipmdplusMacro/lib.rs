@@ -1,109 +1,74 @@
+#![allow(unused_macros, unused_imports, dead_code, unused_variables)] 
+#[macro_use]
+extern crate clipmdplus_macro;
+use crate::clipmdplus_macro::Name;
+use crate::clipmdplus_macro::VariantName;
+
 #[macro_use]
 extern crate derive_more;
 
-#[derive(From)]
-#[derive(Into)]
-#[derive(Constructor)]
-#[derive(Eq, PartialEq, Debug, Clone)]
-#[derive(Add)]
-#[derive(Mul)]
-#[derive(Neg)]
-#[derive(AddAssign)]
-#[derive(MulAssign)]
-#[derive(FromStr)]
-#[derive(Display)]
-#[derive(Octal)]
-#[derive(Binary)]
-#[derive(Deref, DerefMut)]
-#[into(owned, ref, ref_mut)]
+// ! Insert Serde Tests
+
+// ! Dervive Name VariantName
+#[derive(clipmdplus_macro::Name)]
+#[derive(clipmdplus_macro::VariantName)]
 struct MyInt(i32);
 
-#[derive(Clone, Debug, Eq, PartialEq)]
-#[derive(Add)]
-#[derive(Sum)]
-#[derive(Mul)]
-#[derive(MulAssign)]
-#[derive(Product)]
-#[mul(forward)]
-#[mul_assign(forward)]
+#[derive(Name)]
+#[derive(VariantName)]
 struct MyInt2(i32);
 
-#[derive(Eq, PartialEq, Debug)]
-#[derive(Index, IndexMut)]
-#[derive(Deref, DerefMut)]
-#[derive(IntoIterator)]
-#[deref(forward)]
-#[deref_mut(forward)]
-#[into_iterator(owned, ref, ref_mut)]
+#[derive(Name)]
+#[derive(VariantName)]
 struct MyVec(Vec<i32>);
 
-#[derive(Eq, PartialEq, Debug)]
-#[derive(Deref, DerefMut)]
-#[deref(forward)]
-#[deref_mut(forward)]
+#[derive(Name)]
+#[derive(VariantName)]
 struct MyBoxedInt(Box<i32>);
 
-#[derive(Eq, PartialEq, Debug)]
-#[derive(Not)]
-#[derive(From)]
+#[derive(Name)]
+#[derive(VariantName)]
 struct MyBool(bool);
 
-#[derive(From)]
-#[derive(Into)]
-#[derive(Constructor)]
-#[derive(Add)]
-#[derive(Eq, PartialEq, Debug)]
-#[derive(Mul)]
-#[derive(AddAssign)]
+#[derive(Name)]
+#[derive(VariantName)]
 struct MyUInt(u64, u64);
 
-#[derive(From)]
-#[derive(Into)]
-#[derive(Constructor)]
-#[derive(FromStr)]
-#[derive(Eq, PartialEq, Debug)]
-#[derive(Display)]
+#[derive(Name)]
+#[derive(VariantName)]
 struct SimpleStruct {
     int1: u64,
 }
 
-#[derive(From)]
-#[derive(Constructor)]
-#[derive(Add, Sub, Mul, Div, Rem, BitAnd, BitOr, BitXor, Shr, Shl)]
-#[derive(Eq, PartialEq, Debug, Clone, Copy)]
-#[derive(Into)]
-#[derive(AddAssign)]
-#[into(owned, ref, ref_mut)]
+#[derive(Name)]
+#[derive(VariantName)]
 struct NormalStruct {
     int1: u64,
     int2: u64,
 }
 
-#[derive(From)]
-#[derive(Eq, PartialEq, Debug)]
+#[derive(Name)]
+#[derive(VariantName)]
 struct NestedInt(MyInt);
 
-#[derive(Eq, PartialEq, Debug)]
-#[derive(From)]
-#[derive(Add, Sub)]
+#[derive(Name)]
+#[derive(VariantName)]
 enum SimpleMyIntEnum {
     Int(i32),
     #[from(ignore)]
     _UnsignedOne(u32),
     _UnsignedTwo(u32),
 }
-#[derive(Eq, PartialEq, Debug)]
-#[derive(From)]
-#[derive(Neg)]
+
+#[derive(Name)]
+#[derive(VariantName)]
 enum SimpleSignedIntEnum {
     Int(i32),
     Int2(i16),
 }
 
-#[derive(Eq, PartialEq, Debug)]
-#[derive(From)]
-#[derive(Add, Sub)]
-#[derive(Neg)]
+#[derive(Name)]
+#[derive(VariantName)]
 enum SimpleEnum {
     Int(i32),
     #[from(ignore)]
@@ -115,9 +80,8 @@ enum SimpleEnum {
     _SomeUnit,
 }
 
-#[derive(Eq, PartialEq, Debug)]
-#[derive(From)]
-#[derive(Add, Sub)]
+#[derive(Name)]
+#[derive(VariantName)]
 enum MyIntEnum {
     SmallInt(i32),
     BigInt(i64),
@@ -138,27 +102,29 @@ enum MyIntEnum {
     Nothing,
 }
 
-#[derive(Eq, PartialEq, Debug)]
-#[derive(Add, Mul)]
+#[derive(Name)]
+#[derive(VariantName)]
 struct DoubleUInt(u32, u32);
 
-#[derive(Eq, PartialEq, Debug)]
-#[derive(Add, Mul)]
+#[derive(Name)]
+#[derive(VariantName)]
 struct DoubleUIntStruct {
     x: u32,
     y: u32,
 }
 
-#[derive(Eq, PartialEq, Debug)]
-#[derive(From, Into, Constructor)]
+#[derive(Name)]
+#[derive(VariantName)]
 struct Unit;
 
 // Tests that we can forward to a path
 // containing `$crate`
+// todo note: dgh: I have know idea if this use_clipmdplus_crate is relevant
 macro_rules! use_clipmdplus_crate {
     () => {
         struct Foo;
-        #[derive(From)]
+        #[derive(Name)]
+        #[derive(VariantName)]
         enum Bar {
             First(#[from(forward)] $crate::Foo),
         }

@@ -46,6 +46,13 @@
 /// fn create_de_arms(target: &DataEnum, n: NamingStyle) -> impl Iterator<Item = TokenStream2> {
 ///
 
+// serde_enum macros
+use std::collections::HashMap;
+// use syn::*;
+use syn::{self, parse_quote, Arm, Data};
+use syn::{Attribute, DataEnum, DeriveInput, Expr, ExprLit, ExprParen, Fields, Lit, parse2, parse_macro_input, Variant}; // path, tokens, Token, 
+
+
 // ! Crates -------------------------------------------------------
 // NamingStyle and NAME_MAP
 // serde_enum

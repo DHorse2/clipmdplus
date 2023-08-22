@@ -185,25 +185,26 @@
 // extern crate derive_more;
 // !------------------------------------------------------------
 // #[allow(unused_imports)]
-#[allow(unused_macros)]
+#[allow(unused_macros, unused_imports)]
+#[macro_use]
 extern crate clipmdplus_macro;
-pub use clipmdplus_library::NamedStruct;
-pub use clipmdplus_macro::Name;
-pub use clipmdplus_macro::NamingStyle;
-pub use clipmdplus_library::NamedVariant;
-pub use clipmdplus_macro::VariantName;
+pub use crate::clipmdplus_macro::Name;
+pub use crate::clipmdplus_macro::VariantName;
 // 
-pub use clipmdplus_macro::Deserialize_enum;
-pub use clipmdplus_macro::Serialize_enum;
-// use clipmdplus_macro::ToString;
+pub use crate::clipmdplus_macro::Deserialize_enum;
+pub use crate::clipmdplus_macro::Serialize_enum;
 
-// extern crate clipmdplus_library;
-pub use clipmdplus_library::*;
-
+#[allow(unused_macros, unused_imports)]
 // #[macro_use]
-// #[allow(unused_imports)]
-// #[allow(unused_macros)]
+extern crate clipmdplus_library;
+#[allow(unused_imports)]
+use clipmdplus_library::*;
+// pub use clipmdplus_library::imafunc;
+
+#[allow(unused_macros, unused_imports)]
+#[macro_use]
 extern crate derive_more;
+#[allow(unused_imports)]
 pub use derive_more::*;
 
 pub mod clip_util;

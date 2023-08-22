@@ -64,7 +64,9 @@ where
     T: Any,
     T: ?Sized
 {
-    format!("{}", std::any::type_name::<T>()).as_str()
+    let ty_name = format!("{}", std::any::type_name::<T>()).as_str();
+    result = ty_name.clone();
+    result
 }
 
 pub fn type_name_from_id<T: ?Sized + Any, I>(i: &TypeId) -> &'static str 
@@ -78,17 +80,27 @@ where
     // TypeId::type_name::<T>
     // i.type_name::<I>()
     // &TypeId::of::<i<T>>().type_name()
-    let b: &'static str = i.type_id().type_name().to_string().as_str();
+    let b: &'static str = i.type_id().type_name().clone(); // .to_string().as_str();
     b
 }
 
-pub fn type_of_val<T: ?Sized>(_: &T) -> &'static TypeId {
-    &TypeId::of::<T>()
+pub fn type_of_val<T: ?Sized + 'static>(_: &T) -> TypeId {
+    TypeId::of::<T>().clone()
     // t.type_id()
 }
 //
 // Compare
-pub fn type_is_equal<T: ?Sized, U: ?Sized>(_: &T, _: &U) -> bool {
+pub fn type_is_equal<T: ?Sized  + 'static, U: ?Sized  + 'static>(_: &T, _: &U) -> bool {
+    // if let TypeId::of::<T>() = TypeId::of::<U>() {
+    //     return true
+    // }
+    // false
+    // let result = TypeId::of::<T>() == TypeId::of::<U>();
+    // result
+    // if TypeId::of::<T>() == TypeId::of::<U>() {
+    //     return true
+    // }
+    // false
     TypeId::of::<T>() == TypeId::of::<U>()
 }
 // note on function pointers.

@@ -34,18 +34,18 @@
 extern crate proc_macro;
 //
 // derive_name macros
-use lazy_static::lazy_static;
-// proc_macro
-use proc_macro::TokenStream;
-use proc_macro2::TokenStream as TokenStream2;
-use quote::quote;
-use quote::TokenStreamExt;
+// use lazy_static::lazy_static;
+// // proc_macro
+// use proc_macro::TokenStream;
+// use proc_macro2::TokenStream as TokenStream2;
+// use quote::quote;
+// use quote::TokenStreamExt;
 
-// serde_enum macros
-use std::collections::HashMap;
-// use syn::*;
-use syn::{self, parse_quote, Arm, Data};
-use syn::{Attribute, DataEnum, DeriveInput, Expr, ExprLit, ExprParen, Fields, Lit, parse2, parse_macro_input, Variant}; // path, tokens, Token, 
+// // serde_enum macros
+// use std::collections::HashMap;
+// // use syn::*;
+// use syn::{self, parse_quote, Arm, Data};
+// use syn::{Attribute, DataEnum, DeriveInput, Expr, ExprLit, ExprParen, Fields, Lit, parse2, parse_macro_input, Variant}; // path, tokens, Token, 
 
 // ! serde_enum ------------------------------------------------------------
 // mod serde_enum;
@@ -60,9 +60,9 @@ use syn::{Attribute, DataEnum, DeriveInput, Expr, ExprLit, ExprParen, Fields, Li
 //  pub mod derive_name;
 //  pub use self::derive_name::*;
  include!(".\\derive_name.rs");
-
 // ! derive_more ------------------------------------------------------------
-// extern crate derive_more;
+extern crate derive_more;
+// use derive_more::{add_assign, add, as_mut, as_ref, constructor_derived, deref, deref_mut, display, from, from_str, index, index_mut, into, mul_assign, mul, not, try_into, is_variant};
 // use derive_more::*;
 //  pub mod derive_more;
 //  pub use self::derive_more::*;

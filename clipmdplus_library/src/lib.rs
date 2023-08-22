@@ -36,7 +36,22 @@
 // use std::net;
 // ! derive_name_trait ------------------------------------------------------------
 // #[macro_use]
-pub mod derive_name_trait;
-pub use self::derive_name_trait::*;
-// include!(".\\derive_name_trait.rs");
+// todo don't export everthing everywhere.
 
+// pub mod pub_derive_name_trait;
+// pub use self::pub_derive_name_trait::*;
+// // include!(".\\pub_derive_name_trait.rs");
+pub fn imafunc() -> String {
+    "string".to_string().clone()
+}
+pub fn imafunc2<'dumm>(mut i: String) -> String {
+    // i = AsMut::as_mut(&mut "string");
+    // i = &mut String::from("string").as_str().to_owned();
+    // i = &mut "string".to_owned().to_string();
+    i.push_str("oops");
+    if i == "Help" {
+        // i = &mut "string".clone();
+        i = String::from("string".to_string());
+    }
+    i
+}

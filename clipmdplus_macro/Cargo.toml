@@ -18,57 +18,63 @@ keywords = ["clipboard", "copy", "cut", "paste", "clippings", "ETL", "Windows", 
 # readme = "README.md"
 # repository = ?
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [lib]
 name = "clipmdplus_macro"
-# path = "src/lib.rs"
-# crate-type = ["proc-macro"]
-# crate-type = ["cdylib", "rlib"]
 proc-macro = true
 
-[features]
-## default = ["console_error_panic_hook"]
+# [features]
+# default = ["console_error_panic_hook"]
+# # bottom of this doc
+
+[package.metadata.docs.rs]
+features = ["document-features"]
+# features = ["document-features"]
+#
+
+# [features]
+# Item_name = []
+# variant_name = []
+# default = ["Item_name", "variant_name"]
+
+# [[test]]
+# name = "lib"
+# path = "tests/lib.rs"
+# required-features = ["Item_name", "variant_name"]
+
+# [[test]]
+# name = "Item_name"
+# path = "tests/name.rs"
+# required-features = ["Item_name"]
+
+# [[test]]
+# name = "variant_name"
+# path = "tests/variant_name.rs"
+# required-features = ["variant_name"]
+
+# [dependencies.convert_case]
+# version = "0.4"
+# # version = "0.4"
+# optional = true
 
 [dependencies]
-### app dependencies
-# clipmdplus_library = { workspace = true }
-# clipmdplus_library = {version = "0.1.0", workspace = true, path = "..\\clipmdplus_library" }
 derive_more = {workspace = true }
 # derive_more = {version = "0.99.17", workspace = true, path = "..\\derive_more" }
 
 ### external crates
-# blob = "0.3.0"
-# chrono = {version = "0.4.23", features = ["serde"]}
 document-features = { version = "0.2.7" , optional = true }
-# all-features = true, 
-# optional = true
-# libc = "0.2.141"
-# postgres = "0.19.4"
-# http / json
-# reqwest = {version = "0.11.18", features = ["json"]}
 
 # Serialization
 serde = {version = "1.0.164", features = ["derive", "rc"]}
 serde-enum = "0.1.4" 
-serde-enum-str = "0.3.2"
+serde-enum-str = "0.4.0"
 serde_json = "1.0.97"
 
 # System
-# sled = "0.34.6"
-# sys = "0.0.0"
 thiserror = "1.0.40"
+
 # async
 lazy_static = "1.4.0"
 tokio = { version = "1.28.2", features = ["full"] }
-
-# UI start.
-# egui = { version = "0.22.0"} 
-# , features = ["provide_any"] }
-# enum_derive = "0" can't have payloads
-# eframe = "0.22.0"
-# egui_web = "0.17.0"
-# UI end.
 
 # Proc Macro
 #! derive_more = "0.99.17" local copy in use
@@ -76,8 +82,4 @@ tokio = { version = "1.28.2", features = ["full"] }
 proc-macro2 = "1.0.60"
 syn = "2.0.18"
 quote = "1.0.28"
-#
-[package.metadata.docs.rs]
-features = ["document-features"]
-# features = ["document-features"]
 #

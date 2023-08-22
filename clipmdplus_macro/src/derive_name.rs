@@ -13,10 +13,13 @@
 ///     VariantName
 ///     
 
-// derive_name crates
-// use proc_macro::TokenStream;
-// use quote::quote;
-// use syn::{self, parse_quote, Arm, Data};
+// derive_name macros
+use lazy_static::lazy_static;
+// proc_macro
+use proc_macro::TokenStream;
+use proc_macro2::TokenStream as TokenStream2;
+use quote::quote;
+use quote::TokenStreamExt;
 
 /// Name
 #[allow(unused_macros)]
@@ -25,14 +28,19 @@
 pub fn names(input: TokenStream) -> TokenStream {
     let ast: syn::DeriveInput = syn::parse_macro_input!(input);
     let ident = &ast.ident;
+    let quoted_ident = format!("{}", ident);
     let gen = quote! {
-        impl clipmdplus_library::NamedStruct for #ident {
+
+        impl #ident {
             fn name() -> &'static str {
-                stringify!(#ident)
+                #quoted_ident
+                // #ident
+                // stringify!(#ident)
             }
         }
+
     };
-    eprintln!("{}", gen);
+    // eprintln!("{}", gen);
     gen.into()
 }
 /// VariantName
@@ -42,27 +50,31 @@ pub fn names(input: TokenStream) -> TokenStream {
 pub fn variant(input: TokenStream) -> TokenStream {
     let ast: syn::DeriveInput = syn::parse_macro_input!(input);
     let item_ident = &ast.ident;
+
+    // let _quote_mark = '"';
     
     if let Data::Enum(r#enum) = &ast.data {
         let ident = &ast.ident;
-        let gen_enum: TokenStream2 = quote! {
-            impl clipmdplus_library::NamedStruct for #ident {
-                fn name() -> &'static str {
-                    stringify!(#ident)
+        let quoted_ident = format!("{}", ident);
+        // let quoted_ident = format!("{}{}{}", quote_mark, ident, quote_mark);
+        let mut gen_enum: TokenStream2 = quote! {
+            impl #ident {
+                fn enum_name() -> &'static str {
+                    #quoted_ident
+                    // \"#ident\"
+                    // stringify!(#ident)
                 }
             }
+
         };
-        
-        // eprintln!("{}", gen);
-        // gen_e.<TokenStream2 as Into<T>>::into();
+        // eprintln!("{}", gen_enum);
 
         let mut match_arms = Vec::<Arm>::with_capacity(r#enum.variants.len());
 
         for variant in r#enum.variants.iter() {
             let variant_ident = &variant.ident;
             let match_pattern = match &variant.fields {
-                syn::Fields::Named(_) => {
-                    quote!( Self::#variant_ident {..} )
+                syn::Fields::Named(_) => {                    quote!( Self::#variant_ident {..} )
                 }
                 syn::Fields::Unnamed(_) => {
                     quote!( Self::#variant_ident (..) )
@@ -74,28 +86,26 @@ pub fn variant(input: TokenStream) -> TokenStream {
                 #match_pattern => stringify!(#variant_ident)
             });
         }
-        let mut gen_variant = quote! {
-            impl clipmdplus_library::NamedVariant for #ident {
-                fn name(&self) -> &'static str {
+        let gen_variant = quote! {
+            
+            impl #ident {
+                fn variant_name(&self) -> &'static str {
                     match self {
                         #(#match_arms),*
                     }
                 }
             }
+
         };
-        // eprintln!("{}", gen);
-        gen_variant.append_all(gen_enum);
-        // let gen_out: TokenStream2 = format!("{:?}{:?}", gen_enum, gen_variant);
-        // let gen_out: TokenStream2 = syn::parse2(format!("{:?}{:?}", gen_enum, gen_variant));
-        // let gen_out: TokenStream2 = syn::parse2(gen_enum, gen_variant);
-        // let gen_out = syn::parse_str(format!("{:?}{:?}", gen_enum, gen_variant));
-        // eprintln!("{}", gen_out);
-        // gen_out.into()
-        eprintln!("{}", gen_variant);
-        gen_variant.into()
+
+        gen_enum.append_all(gen_variant);
+        // eprintln!("{}", gen_enum);
+        gen_enum.into()
     } else {
+        // &ast.ident
+        let msg = format!("Can only implement 'VariantName' on a enum. {} is not an enum", item_ident);
         quote!(
-            compile_error!("Can only implement 'VariantName' on a enum. {} is not an enum", #item_ident);
+            compile_error!(#msg);
         )
         .into()
     }

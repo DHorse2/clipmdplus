@@ -12,20 +12,12 @@ extern crate serde;
 use serde::Serialize;
 use serde::Deserialize;
 
-// #![allow(dead_code)]
-// #[macro_use]
 extern crate derive_more;
 use derive_more::From;
 
-// extern crate clipmdplus_macro;
-// use crate::clipmdplus_macro;
-// use super::VariantName;
-// use super::super::VariantName;
-// use crate::clipmdplus_macro::Name;
-// use crate::clipmdplus_macro::VariantName;
+extern crate clipmdplus_macro;
 use clipmdplus_macro::Name;
 use clipmdplus_macro::VariantName;
-// use super::super::clipmdplus_macro::VariantName;
 
 /// ! DbType -------------------------------------------------
 /// DbType enumerates the chosen database to use
@@ -34,7 +26,7 @@ use clipmdplus_macro::VariantName;
 // #[derive(Clone, derive_more::From, derive_name::VariantName, serde_enum::ToString, serde_enum::Deserialize_enum, serde_enum::Serialize_enum,  /* */ )]
 // , Serialize_enum_str, Deserialize_enum_str, )]
 // , From
-#[derive(Clone, Debug, From, Eq, Hash, Name, Ord, PartialEq, PartialOrd, VariantName, Deserialize, Serialize, /* ... */)]
+#[derive(Clone, Debug, From, Eq, Hash, Name, Ord, PartialEq, PartialOrd, VariantName, Deserialize, Serialize)]
 pub enum DbType {
     /// Json.
     // #[serde(rename = "Json")]
@@ -58,7 +50,7 @@ pub enum DbType {
     None
 }
 impl DbType {
-    fn as_str(&self) -> &str { &self.name() } // .enum_name()}
+    fn as_str(&self) -> &str { crate::DbType::name() } // &self.name() // .enum_name()}
 }
 /// ! DpApi -------------------------------------------------------
 /// <DbClient> <DbRow> DbApi DbCrud
@@ -108,12 +100,15 @@ pub trait DbJson {
     type JsonResult;
     fn to_json(&self) -> Self::JsonResult;
     fn from_json(json: &str) -> Self;
-    fn load_json(file_path: &mut String) -> Self 
+    // fn load_json(file_path: &mut String) -> Self 
+    // fn load_json(mut file_path: &mut String) -> Self 
+    fn load_json(mut file_path: String) -> Self 
     where
         Self: Default,
     {
         if file_path.is_empty() {
-            file_path = &mut String::from("ClipboardData.txt");
+            // file_path = &mut String::from("ClipboardData.txt").clone(); // &mut 
+            file_path = String::from("ClipboardData.txt").clone(); // &mut 
         }
         let clip_json = std::fs::read_to_string(file_path).unwrap();
         if clip_json.is_empty() {

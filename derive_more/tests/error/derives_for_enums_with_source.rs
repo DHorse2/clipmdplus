@@ -1,7 +1,10 @@
+
+#![allow(dead_code, unused_variables)] 
+
 use super::*;
 
 derive_display!(TestErr);
-#[allow(dead_code, unused_variables)] 
+
 #[derive(Debug, Error)]
 enum TestErr {
     Unit,

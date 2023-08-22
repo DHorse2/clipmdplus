@@ -1,6 +1,6 @@
+#![allow(dead_code, unused_variables)] 
 use super::*;
 
-#[allow(unused_variables)] 
 #[test]
 fn named_implicit_no_source() {
     derive_display!(TestErr, T);
@@ -47,6 +47,7 @@ fn named_explicit_source() {
     struct TestErr<E, T> {
         #[error(source)]
         explicit_source: E,
+        #[allow(unused_variables, dead_code, unused_imports)] 
         field: T,
     }
 

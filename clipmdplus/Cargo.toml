@@ -13,10 +13,10 @@ exclude = [
     "image.png",
     "Cargo.lock",
 ]
-# license = "PROPRIETARY"
-license-file = "clipmdplus_license.txt"
+license = "MIT"
+# license-file = "clipmdplus_license.txt"
 keywords = ["clipboard", "copy", "cut", "paste", "clippings", "ETL", "Windows", "Linux"]
-# readme = "README.md"
+readme = "README.md"
 # repository = ?
 
 # version.workspace = true
@@ -26,7 +26,6 @@ keywords = ["clipboard", "copy", "cut", "paste", "clippings", "ETL", "Windows", 
 
 default-run = "clipmdplus"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 # Metadata used when generating an Android APK, for example.
 # [package.metadata.android]
 # package-name = "my-awesome-android-app"
@@ -35,14 +34,11 @@ default-run = "clipmdplus"
 [lib]
 ### library clipmdplus_liby
 name = "clipmdplus_lib"
-# path = "src/lib.rs"
-# crate-type = ["cdylib", "rlib"]
 proc-macro = true
 
 [[bin]]
-### app clipmdplus
+### app bin clipmdplus
 name = "clipmdplus"
-# path = "src/main.rs"
 
 # [build-dependencies]
 # clipmdplus_macro.workspace = true
@@ -51,7 +47,6 @@ name = "clipmdplus"
 ### app dependencies
 clipmdplus_macro = { workspace = true }
 # clipmdplus_macro = {version = "0.1.0", workspace = true, path = "..\\clipmdplus_macro" }
-# path = "..\\clipmdplus_macro" ,
 clipmdplus_library = { workspace = true }
 derive_more = { workspace = true }
 
@@ -119,3 +114,13 @@ features = ["document-features"]
 # Development:
 # [dev-dependencies]
 # features = ["dev-dependencies"]
+
+# [[example]]
+# name = "deny_missing_docs"
+# path = "examples/deny_missing_docs.rs"
+# required-features = ["add_assign", "add", "as_mut", "as_ref", "constructor_derived", "deref", "deref_mut", "display", "from", "from_str", "index", "index_mut", "into", "mul_assign", "mul", "not", "try_into", "is_variant"]
+
+# [[test]]
+# name = "add_assign"
+# path = "tests/add_assign.rs"
+# required-features = ["add_assign"]

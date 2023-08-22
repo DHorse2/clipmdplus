@@ -1,25 +1,11 @@
 // stdmd app_error.rs
-// AppError
-// UiError
-// DbError
+/// AppError
+/// UiError
+/// DbError
 // !------------------------------------------------------------
-// extern crate serde;
-// #[macro_use]
-// #[allow(unused_macros)]
-// extern crate clipmdplus_macro;
-
-// use clipmdplus_macro::Name;
-// use clipmdplus_macro::VariantName;
-// use clipmdplus_macro::Deserialize_enum;
-// use clipmdplus_macro::Serialize_enum;
-
-// extern crate derive_more;
-// use derive_more::Display;
-use crate::derive_more::From;
-//
 use std::error::Error as StdError;
 // use std::io::Error as StdIoError;
-
+//
 // extern crate serde;
 use serde::Serialize;
 use serde::Deserialize;
@@ -36,20 +22,14 @@ use std::fmt;
 //
 // use thiserror::Error as ErrorDerive;
 //
-// use self::Name;
-// use self::VariantName;
-// use self::Deserialize_enum;
-// use self::Serialize_enum;
-
-// use clipmdplus_macro::Name;
-use clipmdplus_macro::VariantName;
-use clipmdplus_macro::Deserialize_enum;
-use clipmdplus_macro::Serialize_enum;
-
-// use super::super::Name;
-// use super::super::VariantName;
-// use super::super::Deserialize_enum;
-// use super::super::Serialize_enum;
+// use crate::clipmdplus_macro::Name;
+use crate::clipmdplus_macro::VariantName;
+use crate::clipmdplus_macro::Deserialize_enum;
+use crate::clipmdplus_macro::Serialize_enum;
+//
+// extern crate derive_more;
+// use crate::derive_more::Display;
+use crate::derive_more::From;
 //
 // !------------------------------------------------------------
 // Error data structs and enums

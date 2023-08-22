@@ -35,6 +35,8 @@ repository = "https://github.com/JelteF/derive_more"
 name = "derive_more"
 proc-macro = true
 
+# use derive_more::{add_assign, add, as_mut, as_ref, constructor_derived, deref, deref_mut, display, from, from_str, index, index_mut, into, mul_assign, mul, not, try_into, is_variant};
+
 [features]
 add = []
 add_assign = []

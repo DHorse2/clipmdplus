@@ -1,8 +1,8 @@
+#![allow(dead_code, unused_variables)] 
 use super::*;
 
 derive_display!(TestErr, T, E);
 #[derive(Debug, Error)]
-#[allow(dead_code, unused_variables)] 
 enum TestErr<E, T> {
     Unit,
     NamedImplicitNoSource {
