@@ -1,13 +1,17 @@
-//! db_api.rs
-//! Types ------------------------------------------------------------
-//! DbType
-//! DbApi
-//! DbCrud
-//! type DbError = stdmd::db_api::DbError;
-//! type JsonError = serde_json::Error; // todo started api
-//! pub type DbClient = postgres::Client; // todo defaults 
-//! pub type DbClientError = postgres::Error;
+// db_api.rs
+#![allow(dead_code, unused_imports)] 
+/// Db_api Types:
+/// DbType
+/// DbApi
+/// DbCrud
+/// type DbError = stdmd::db_api::DbError;
+/// type JsonError = serde_json::Error; // todo started api
+/// pub type DbClient = postgres::Client; // todo defaults 
+/// pub type DbClientError = postgres::Error;
 /// 
+
+// use self::*;
+
 extern crate serde;
 use serde::Serialize;
 use serde::Deserialize;
@@ -49,6 +53,7 @@ pub enum DbType {
     // #[serde(rename = "None")]
     None
 }
+
 impl DbType {
     fn as_str(&self) -> &str { crate::DbType::name() } // &self.name() // .enum_name()}
 }
@@ -60,48 +65,64 @@ impl DbType {
 /// It's somewhat intuitive where your database uses has a Type and Client.
 /// Custom error handling is supplied via DbError and DbClientError.
 pub trait DbApi {
+    /// The database type.
     type DbType;
+    /// The error return by the implementation.
     type DbError;
+    /// The database client used for accessing the DB.
     type DbClient;
+    /// The database client error if it is used.
     type DbClientError;
 
+    /// Connect to the database.
     fn db_connect() -> Result<Self::DbClient, Self::DbError>; // dyn postgres::Error
+    /// Disconnect from the database.
     fn db_disconnect(client: Self::DbClient) -> Result<bool, Self::DbError>; // dyn postgres::Error
-
+    /// Execute a database command.
     fn db_execute(&self, client: Self::DbClient, query: &str, params: &[&(dyn postgres::types::ToSql + Sync)]) -> Result<u64, Self::DbClientError>;
-
-    // fn db_executeB(&self, client: Self::DbClient, query: &str, params: &[&(dyn postgres::types::ToSql + Sync)]) -> Result<u64, Self::DbClientError>
-    // todo NOTE: uses dyn postgres::types::ToSql + Sync
-    // How do you use an dynamic type's function?
-    // {
-    //     Self::client.execute( // <<<< fails
-    //         query,
-    //         params
-    //     )?
-    // }
+    /// Check to see if the database exists.
     fn db_exists(&self, client: Self::DbClient) -> Result<bool, Self::DbError>;
 }
 /// ! DbCrud ------------------------------------------------------
 // CRUD
 pub trait DbCrud : DbApi {
+    // The database type.
+    // type DbType;
+    /// The error return by the implementation.
+    type DbError;
+    /// The database client used for accessing the DB.
+    type DbClient;
+    // The database client error if it is used.
+    // type DbClientError;
+    /// A database client row (record).
     type DbRow;
-    fn db_row_insert(&self, client: Self::DbClient) -> Result<u64, Self::DbError>;
-    fn db_row_delete(&self, client: Self::DbClient) -> Result<u64, Self::DbError>;
-    fn db_row_update(&self, client: Self::DbClient) -> Result<u64, Self::DbError>;
-    fn db_row_exists(&self, client: Self::DbClient) -> Result<bool, Self::DbError>;
-
-    fn db_row_get(row: Self::DbRow) -> Result<u64, Self::DbError>;
-    fn from__row(row: Self::DbRow) -> Self;
+    /// Insert a row into the database.
+    fn db_row_insert(&self, client: <Self as DbCrud>::DbClient) -> Result<u64, <Self as DbCrud>::DbError>;
+    /// Delete a row in the database.
+    fn db_row_delete(&self, client: <Self as DbCrud>::DbClient) -> Result<u64, <Self as DbCrud>::DbError>;
+    /// Update an existing row in the database.
+    fn db_row_update(&self, client: <Self as DbCrud>::DbClient) -> Result<u64, <Self as DbCrud>::DbError>;
+    /// Check if the database row already exists.
+    fn db_row_exists(&self, client: <Self as DbCrud>::DbClient) -> Result<bool, <Self as DbCrud>::DbError>;
+    /// Get the database row.
+    fn db_row_get(row: Self::DbRow) -> Result<u64, <Self as DbCrud>::DbError>;
+    /// Convert the database row to Self.
+    fn from_row(row: Self::DbRow) -> Self;
 }
 
-/// ! DbJson ------------------------------------------------------
+/// ! bJson ------------------------------------------------------
 pub trait DbJson {
+    /// The error returned by Json processing.
     type JsonError;
+    /// The result returned by Json processing.
     type JsonResult;
+    /// Convert self to Json format.
     fn to_json(&self) -> Self::JsonResult;
+    /// Load self from Json formatted data.
     fn from_json(json: &str) -> Self;
     // fn load_json(file_path: &mut String) -> Self 
     // fn load_json(mut file_path: &mut String) -> Self 
+    /// Get the Json data from disk and load Self.
     fn load_json(mut file_path: String) -> Self 
     where
         Self: Default,

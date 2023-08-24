@@ -1,5 +1,7 @@
 ## clipmdplus crate
 [workspace]
+# workspace.resolver = "1"
+resolver = "1"
 ##! ### Clipboard crates
 members = [
 ##! ### Clipboard library
@@ -11,7 +13,6 @@ members = [
 ##! ### Derive More Extension
     "derive_more"
 ]
-
 ##! Workspace details
 ### The foo feature enables the `foo` functions
 [workspace.package]

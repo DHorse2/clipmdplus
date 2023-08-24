@@ -14,10 +14,14 @@ use std::fmt;
 
 use crate::stdmd::types::range::Range;
 // temporary
+/// A trivial sequence object .
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Sequence { 
+    /// The current value.
     current: i32,
+    /// The sequence range that is selected.
     selected: Option<Range>,
+    /// Possible paging handling.
     page: Option<i32>,
  }
  impl Default for Sequence {
@@ -36,7 +40,7 @@ impl fmt::Display for Sequence {
         // write!(f, "Sequence: current {}, selected ({},{}), page {}", self.current, self.selected.unwrap().start, self.selected.unwrap().end, self.page.unwrap())
     }
 }
-#[allow(dead_code, unused, unused_imports)] // object creation (pre debug)
+#[allow(dead_code, unused_imports)] // object creation (pre debug)
 impl Sequence { 
     /// <summary>
     /// Open the clipboard database file.

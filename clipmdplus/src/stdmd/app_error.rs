@@ -35,25 +35,34 @@ use crate::derive_more::From;
 // Error data structs and enums
 include!(".\\app_error_data.rs");
 // !------------------------------------------------------------
+/// PhantomData for Errors.
 pub struct PhantomError;
 // !------------------------------------------------------------
-// APPLICATION and GUI
-// !------------------------------------------------------------
+/// App error is a simplified error type.
+/// It might be returned to the App.
+/// Under review. Might be discarded.
 // #[derive(Debug, Deserialize, Serialize)]
 #[derive(Debug, derive_more::Display, thiserror::Error, VariantName, Deserialize_enum, Serialize_enum,  /* */ )]
-// #[doc(hidden)]
 pub enum AppError {
+    /// from the database.
     DbError,
+    /// from the UI.
     UiError,
+    /// Unknown source.
     Unknown,
 }
 // !------------------------------------------------------------
+/// Errors received from GUI components or upon validation.
 // #[derive(Debug, Deserialize, Serialize)] // ErrorDerive, 
 #[derive(Debug, derive_more::Display, thiserror::Error, VariantName, Deserialize_enum, Serialize_enum,  /* */ )]
 pub enum GuiError {
+    /// Entry format invalid (ie like dates).
     InvalidInput,
+    /// Unable to convert the value.
     InvalidConversion,
+    /// The clipboard data is bad and can't be used.
     InvalidClipboardData,
+    /// The error type, source or cause is unknown.
     Unknown,
 }
 // !------------------------------------------------------------
@@ -67,13 +76,14 @@ pub enum GuiError {
 // #[derive(Deserialize_enum, Serialize_enum,  /* */ )]
 // #[derive(Debug, derive_more::Display, thiserror::Error, derive_name::VariantName, serde_enum::Deserialize_enum, serde_enum::Serialize_enum,  /* */ )]
 // #[derive(Clone, derive_more::Display, thiserror::Error, derive_more::From, VariantName, serde::Deserialize, serde::Serialize,  /* */ )]
+/// A custom database error.
 #[derive(Clone, thiserror::Error, derive_more::From, VariantName, serde::Deserialize, serde::Serialize,  /* */ )]
 pub enum DbError {
-    // #[error("database client error {DbErrorDataClient::Name}")]
+    /// #[error("database client error {DbErrorDataClient::Name}")]
     // Client(#[from] DbErrorDataClient),
     Client(DbErrorDataClient),
 
-    // #[error("deserialize error {DbErrorDataDe}")]
+    /// #[error("deserialize error {DbErrorDataDe}")]
     Deserialize(DbErrorDataDe), 
     // Deserialize(#[from] DbErrorDataDe), 
     // Deserialize(#[from] Box<dyn SerdeDeError>), (a Trait) 
@@ -81,33 +91,28 @@ pub enum DbError {
     // serde::de::Error
     // Deserialize(#[from] String), 
 
-    // #[error(transparent)]
+    /// #[error(transparent)]
+    /// StdIoError(#[from] std::io::Error),
     StdIoError(DbErrorDataIo),
-    // StdIoError(#[from] std::io::Error),
 
-    // #[error("json error {JsonErrorData}")]
+    /// #[error("json error {JsonErrorData}")]
     Json(JsonErrorData),
 
-    // #[error("postgres SQL error {DbErrorDataPostgres}")]
+    /// #[error("postgres SQL error {DbErrorDataPostgres}")]
     // #[error(transparent)]
     Postgres(DbErrorDataPostgres),
     // Postgres(#[from] Box<postgres::error::Error>),
 
-    // #[error("serialize error {DbErrorDataSer}")]
+    /// #[error("serialize error {DbErrorDataSer}")]
     Serialize(DbErrorDataSer),
-    // I tried everything :( 
-    // Serialize(#[from] DbErrorDataSer),
-    // Serialize(#[from] Box<dyn SerdeSerError>), (a Trait)
-    // serde::ser::Error
-    // Serialize(#[from] String),
 
-    // #[error("unknown error {DbErrorData}")]
+    /// #[error("unknown error {DbErrorData}")]
     Unknown(DbErrorData),
 
-    // #[error("general std error {DbErrorDataStd}")]
+    /// #[error("general std error {DbErrorDataStd}")]
     Std(DbErrorDataStd),
 
-    // #[error("phantom error")]
+    /// #[error("phantom error")]
     PhantomError,
     // X = (()),
 }
@@ -154,23 +159,27 @@ impl fmt::Debug for DbError {
 // !------------------------------------------------------------
 // #[derive(thiserror::Error, serde_enum::Deserialize_enum, serde_enum::Serialize_enum,  /* */ )]
 // #[derive(thiserror::Error, Deserialize, Serialize)] 
-
 // #[derive(thiserror::Error, derive_name::VariantName, serde_enum::Deserialize_enum, serde_enum::Serialize_enum,  /* */ )]
 // #[derive(Clone, derive_more::Display, thiserror::Error, derive_more::From, VariantName, serde::Deserialize, serde::Serialize,  /* */ )]
+/// A custom JsonError needed later.
 #[derive(Clone, thiserror::Error, VariantName, serde::Deserialize, serde::Serialize,  /* */ )]
 pub enum JsonError {
+    /// A Json parsing error.
     #[error("parsing error {0:?}")]
     Parsing(String),
+    /// Generic or unknown IO errors.
     #[error("io error {0:?}")]
     Io(String),
-    // #[error(transparent)]
+    /// Errors received from std::io.
     #[error("std::io error {0:?}")]
-    IoError(DbErrorDataStd), // io:Error
+    IoError(DbErrorDataStd),
+    /// Serde errors.
     #[error("serde json error {0:?}")]
     Serde(DbErrorData), // serde_json::Error
+    // An error of unknown type or orgin.
+    /// Unknown {#[from]  data: String },
     #[error("unknown error {0:?}")]
     Unknown(String),
-    // Unknown {#[from]  data: String },
 }
 // Implement std::fmt::Debug for JsonError
 impl fmt::Debug for JsonError {

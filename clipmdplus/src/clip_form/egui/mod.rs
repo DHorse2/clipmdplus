@@ -1,4 +1,5 @@
-/// ClipForm egui implimentation.
+// ClipForm Egui module mod.rs
+/// The ClipForm egui implimentation.
 /// UI selection is still in progress.
 /// multiple concurrent windows are needed.
 /// Includes:

@@ -21,7 +21,9 @@ use serde::Serialize;
 // Date Stuff
 
 // !------------------------------------------------------------
-// DataCreationTime
+/// DataCreationTime is a (currently unused) module's whose purpose is questionable.
+/// It is intended to handle non-standard date formats and serialization.
+/// todo review DataCreationTime
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 #[serde(rename = "data_creation_time")]
@@ -29,12 +31,15 @@ pub struct DataCreationTime {
     // #[serde(default)]
     // #[serde(with = "ts_seconds_option")]
     // SystemTime
+    /// The data being stored. There are several type options.
+    /// The first in this list was chosen.
+    ///     pub datetimesystem: Option<SystemTime>,
+    ///     pub datetimeutc: Option<chrono::NaiveDateTime>,
+    ///     pub datetimeutc: Option<chrono::DateTime<Utc>>,
+    ///     pub datetimeutc: DateTime<Utc>,
+    ///     datetimelocal: chrono::DateTime<Local>,
+    ///     datetimeutc: Type::DateTime,
     pub datetimesystem: Option<SystemTime>,
-    // pub datetimeutc: Option<chrono::NaiveDateTime>,
-    // pub datetimeutc: Option<chrono::DateTime<Utc>>,
-    // pub datetimeutc: DateTime<Utc>,
-    // datetimelocal: chrono::DateTime<Local>,
-    // datetimeutc: Type::DateTime,
 }
 impl Eq for DataCreationTime {}
 // impl std::ops::Deref for DataCreationTime {
@@ -45,6 +50,7 @@ impl Eq for DataCreationTime {}
 //     }
 // }
 impl DataCreationTime {
+    /// creates a new DateTime set to now().
     pub fn new() -> Self {
         Self {
             datetimesystem: Some(SystemTime::now()),
@@ -61,6 +67,7 @@ impl DataCreationTime {
 }
 
 impl Default for DataCreationTime {
+    /// creates a new DateTime. Similarly to new() it is set to now().
     fn default() -> Self {
         DataCreationTime {
             // datetimeutc: DateTime::<Utc>::from_local(chrono::NaiveDateTime::new(), Utc)

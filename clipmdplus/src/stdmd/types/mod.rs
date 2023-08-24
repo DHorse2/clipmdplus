@@ -18,15 +18,18 @@ use std::any::TypeId;
 // use crate::stdmd::types::types_form::Sequence
 // use crate::stdmd::types::types_form::
 // !------------------------------------------------------------
+/// Types of forms and UI types.
 pub mod type_form; // romove?
 pub use self::type_form::*;
-
+/// The knows format types of entities.
 pub mod type_format; // romove?
 pub use self::type_format::*;
 
+/// A range object. (todo student)
 pub mod range; // romove?
 pub use self::range::*;
 
+/// A sequence object (todo student)
 pub mod sequence; // romove?
 pub use self::sequence::*;
 
@@ -54,21 +57,23 @@ pub use self::sequence::*;
 // 48 |     type_name::<T>()
 //    |     ^^^^^^^^^^^^^^^^
 // 48 const fn type_name_of_val<T: ?Sized>(_: &T) -> &'static str {
-
+/// The type name of T as a static str.
 pub fn type_name_of_val<T: ?Sized>(_: &T) -> &'static str {
     type_name::<T>()
 }
 // Any
+/// The type name done another way. (todo student)
 pub fn type_name_of<T>(_: &T) -> &'static str 
 where
     T: Any,
     T: ?Sized
 {
-    let ty_name = format!("{}", std::any::type_name::<T>()).as_str();
-    result = ty_name.clone();
-    result
+    // let ty_name = format!("{}", std::any::type_name::<T>()).as_str();
+    let ty_name = std::any::type_name::<T>().clone();
+    // let result = ty_name.clone();
+    ty_name
 }
-
+/// Given a TypeId it returns its name as a static str.
 pub fn type_name_from_id<T: ?Sized + Any, I>(i: &TypeId) -> &'static str 
 where
     I: ?Sized,
@@ -83,13 +88,13 @@ where
     let b: &'static str = i.type_id().type_name().clone(); // .to_string().as_str();
     b
 }
-
+/// Returns the TypeId of T.
 pub fn type_of_val<T: ?Sized + 'static>(_: &T) -> TypeId {
     TypeId::of::<T>().clone()
     // t.type_id()
 }
 //
-// Compare
+/// Compare the types of two Sized objects. 
 pub fn type_is_equal<T: ?Sized  + 'static, U: ?Sized  + 'static>(_: &T, _: &U) -> bool {
     // if let TypeId::of::<T>() = TypeId::of::<U>() {
     //     return true

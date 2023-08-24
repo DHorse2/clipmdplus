@@ -89,7 +89,7 @@ quote = "1.0.28"
 
 # Windows:# OS
 [dependencies.windows]
-version = "0.48"
+version = "0.51.1"
 features = [
     "Data_Xml_Dom",
     "Win32_Foundation",

@@ -1,5 +1,14 @@
-// main.rs MdClipboard
+#![warn(missing_docs)]
+#![allow(unused_macros, unused_imports)]
+#![cfg_attr(
+    feature = "document-features",
+    // #[doc(hidden)]
+    cfg_attr(doc, doc = ::document_features::document_features!())
+    // #![doc = document_features::document_features!()]
+)]
+//! doc for ClipMdPlus main
 //! Normal crate documentation goes here.
+//! Sample to follow:
 //!
 //! ## Feature flags
 //! 
@@ -169,14 +178,26 @@
 //! [`IsVariant`]: https://dhorse2.github.io/clipmdplus/clipmdplus/is_variant.html
 //! [`Unwrap`]: https://dhorse2.github.io/clipmdplus/clipmdplus/unwrap.html
 
-#![cfg_attr(
-    feature = "document-features",
-    cfg_attr(doc, doc = ::document_features::document_features!())
-)]
-
-// #![doc = document_features::document_features!()]
-#![warn(missing_docs)]
-
+// todo Review the following doc options:
+// #![doc(html_favicon_url = "https://example.com/favicon.ico")]
+// #![doc(html_logo_url = "https://example.com/logo.jpg")]
+// #![doc(issue_tracker_base_url = "https://github.com/rust-lang/rust/issues/")]
+// #![doc(html_no_source)]
+// per item doc options
+// #[doc(inline)] (no_inline)
+// #[doc(hidden)]
+// #[doc(alias = "TheAlias")]
+// FFI might need this for clarity and search:
+// #[doc(alias = "lib_name_do_something")] 
+// !------------------------------------------------------------
+// #![warn(missing_docs)]
+// #![allow(unused_macros, unused_imports)]
+// #![cfg_attr(
+//     feature = "document-features",
+//     // #[doc(hidden)]
+//     cfg_attr(doc, doc = ::document_features::document_features!())
+//     // #![doc = document_features::document_features!()]
+// )]
 // !------------------------------------------------------------
 // extern crate clipmdplus;
 // extern crate clipmdplus_library;
@@ -185,8 +206,7 @@
 // extern crate derive_more;
 // !------------------------------------------------------------
 // #[allow(unused_imports)]
-#[allow(unused_macros, unused_imports)]
-#[macro_use]
+// #[macro_use]
 extern crate clipmdplus_macro;
 pub use crate::clipmdplus_macro::Name;
 pub use crate::clipmdplus_macro::VariantName;
@@ -194,36 +214,47 @@ pub use crate::clipmdplus_macro::VariantName;
 pub use crate::clipmdplus_macro::Deserialize_enum;
 pub use crate::clipmdplus_macro::Serialize_enum;
 
-#[allow(unused_macros, unused_imports)]
 // #[macro_use]
 extern crate clipmdplus_library;
 #[allow(unused_imports)]
 use clipmdplus_library::*;
 // pub use clipmdplus_library::imafunc;
 
-#[allow(unused_macros, unused_imports)]
-#[macro_use]
+// #[doc(hidden)]
+// #[macro_use]
 extern crate derive_more;
-#[allow(unused_imports)]
 pub use derive_more::*;
 
+/// Design: A clipboard history should not have a UI,
+/// a UI uses the history. It's always running.
+/// Ideally the current clip should be independent of
+/// the history, which itself should be optional,
+/// or just live for the current session.
 pub mod clip_util;
 pub use self::clip_util::*;
 
+/// The window and form.
+/// todo some design notes re the form.
 pub mod clip_form;
 pub use self::clip_form::*;
 
+/// Application specific standard library.
+/// NOT std.
 pub mod stdmd;
 pub use self::stdmd::*;
 
+/// Function main (bin) for ClipMdPlus.
+/// Loads the clipboard history.
+/// Opens the form(s).
 #[tokio::main]
+#[warn(unused_mut)]
 pub async fn main() -> Result<(), reqwest::Error> {
     // trace_macros!(true);
     // println!("Hello, world!");
     // trace_macros!(false);
     let mut clip_form = clip_form::ClipForm::default();
-    let mut ui_type = stdmd::types::UiType::EguiNative;
-    let _clip_form_result = clip_form.run(&mut ui_type);
+    let ui_type = stdmd::types::UiType::EguiNative;
+    let _clip_form_result = clip_form.run(ui_type);
     Ok(())
 }
 

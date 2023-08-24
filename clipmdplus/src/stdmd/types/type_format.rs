@@ -1,17 +1,19 @@
-// DataFormats
-// using oringinally System.Windows.Forms.DataFormats.Format
-// Summary:
-//     Provides static, predefined System.Windows.Forms.Clipboard format names. Use
-//     them to identify the format of data that you store in an System.Windows.Forms.IDataObject.
+// type_format.rs DataFormats
+#![allow(dead_code, unused_imports, unused_variables)]
+/// using oringinally System.Windows.Forms.DataFormats.Format
+/// Summary:
+///     Provides static, predefined System.Windows.Forms.Clipboard format names. Use
+///     them to identify the format of data that you store in an System.Windows.Forms.IDataObject.
 /// Clipboard Format
 /// <summary>
 /// Clipboard Format descriptions
 /// </summary>
-/// 
+
+// other things, then struct doc
 /// #region Clipboard Format
 /// <summary>
 /// Clipboard Format
-/// </summary> string[] formats = new String[]
+/// </summary> string[] formats = new String[] see FormatList
 #[derive(Clone, Debug, PartialEq)]
 pub struct Format {
     name: String,
@@ -32,26 +34,47 @@ pub enum FormatType
 // todo add code formats (mdmSRT?)
 // todo check serialization per format
 {
+    /// Bitmap (bmp) image data.
     Bitmap,              // 2
+    /// Comma separated text (csv).
     CommaSeparatedValue, // 101 (100 record data. todo Fix)
+    /// todo Dib. 
     Dib,                 // 8
+    /// todo Dif.
     Dif,                 // 5
+    /// todo EnhancedMetafile.
     EnhancedMetafile,    // 14
+    /// todo FileDrop.
     FileDrop,            // 15
+    /// Html formatted markup text.
     Html,                // 201 (200 document & markup. todo md, uml)
+    /// todo Locale.
     Locale,              // 16
+    /// todo MetafilePict.
     MetafilePict,        // 3
+    /// todo OemText.
     OemText,             // 7
+    /// todo Palette.
     Palette,             // 9
+    /// todo PenData.
     PenData,             // 10
+    /// todo Riff.
     Riff,                // 11
+    /// Rtf rich text format.
     Rtf,                 // 11a
+    /// todo Serializable.
     Serializable,        // 301
+    /// todo StringFormat.
     StringFormat,        // 102
+    /// todo SymbolicLink.
     SymbolicLink,        // 4
+    /// Text data.
     Text,                // 1
+    /// todo Tiff.
     Tiff,                // 6
+    /// Unicode Text data.
     UnicodeText,         // 13
+    /// WaveAudio (wav) audio data.
     WaveAudio,           // 12
 }
 // !------------------------------------------------------------
@@ -92,11 +115,14 @@ pub enum FormatType
 /// Clipboard FormatList vector
 /// </summary> string[] format_list = new String[]#[derive(Clone, Debug, PartialEq)]
 pub struct FormatList {
+    /// FormatList,format contains a vectors of Format objects.
     format: Vec<Format>,
     // or just "vec<Format>",
 }
 
 impl FormatList {
+    /// Build the format list using standard windows format.
+    /// todo Add Linux clipboard data types or build an alternate OS dependant list.
     fn new() -> FormatList {
         FormatList {
             format: vec![

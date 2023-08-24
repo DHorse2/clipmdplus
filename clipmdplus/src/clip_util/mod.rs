@@ -1,14 +1,10 @@
 // clip_util mod.rs
-// Clipboard ClipUtil module (C# namespace)
-//
-// Early development
+#![allow(dead_code, unused_imports, unused_variables)]
 // #[cfg(debug_assertions)]
-#![cfg_attr(debug_assertions, allow(dead_code, unused, unused_imports))]
-//
-// #[allow(dead_code, unused, unused_imports)]
-// #![allow(unused_imports)]
-// #![allow(dead_code)]
-//
+#![cfg_attr(debug_assertions, allow(dead_code, unused_imports))]
+/// Clipboard ClipUtil module
+/// Early development
+
 use blob::Blob;
 //
 extern crate chrono;
@@ -20,7 +16,7 @@ use chrono::serde::ts_seconds_option;
 //
 extern crate derive_more;
 use derive_more::{Add, Display, From, Into};
-
+//
 use postgres::{Client, NoTls};
 use postgres::Column;
 // use postgres::Error;
@@ -117,6 +113,8 @@ include!(".\\clip_meta.rs");
 // Window
 // include!("..\\clip_form\\mod.rs");
 // !------------------------------------------------------------
+/// DoSerial is a remanant is it's purpose for serialization is not known.
+/// Clearly it allows serialzation in XML format. Is it needed?
 pub struct DoSerial {}
 // DoSerial : IXmlSerializable
 impl DoSerial {
@@ -124,11 +122,17 @@ impl DoSerial {
 }
 // !------------------------------------------------------------
 //
+/// The ProgControl object is serialized.
+/// It is used to control and initialize clipboard and its history.
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ProgControl {
+    /// The database type (Postgres)
     pub db_type: DbType,
+    /// The current (redundant) unique key for clipboard history.
     pub id_key_current: u32,
+    /// The current unique key for clipboard history.
     pub sequence_number: u32,
+    /// The total size of the history
     pub clip_count: u32,
     date_time_offset: DataCreationTime,
 }
@@ -165,10 +169,13 @@ impl fmt::Display for DbError {
 // !------------------------------------------------------------
 
 // !------------------------------------------------------------
+/// Message is not currently used.
 #[derive(Serialize, Deserialize)]
 // #[serde(tag = "type")]
 pub enum Message {
+    /// The request.
     Request,
+    /// The response.
     Response,
 }
 

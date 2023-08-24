@@ -1,5 +1,6 @@
 // clip_meta ClipboardMeta
-// #[allow(dead_code, unused, unused_imports)] // object creation (pre debug)
+// #![allow(dead_code, unused_imports, unused_variables)]
+
 // use std::fs::File;
 // use std::fs::read_to_string;
 // use std::io::prelude::*;
@@ -16,9 +17,8 @@
 // use super::
 // use crate::clip_util::IDataObject;
 // !------------------------------------------------------------
-// ClipboardMeta
-// ! NOT IMPLEMENTED
-
+/// ClipboardMeta contains permissions, persistence and sync settings
+/// along with a ClipboardHistory object.
 #[derive(Clone, Debug, From, Eq, Hash, Name, Ord, PartialEq, PartialOrd, Deserialize, Serialize)]
 pub struct ClipboardMeta {
     // todo!(); The clipboard metadata and history
@@ -26,16 +26,17 @@ pub struct ClipboardMeta {
     // App Permissions
     // Persistence settings
     // Sync Settings
-    History: ClipboardHistory
+    history: ClipboardHistory
 }
+/// A vector containing the clipboard history loaded from the database.
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Name, Ord, PartialOrd, Deserialize, Serialize)]
 pub struct ClipboardHistory {
     // ClipboardHistory Vector
     /// History Vector
     /// More performant for immutable data.
     /// todo will need interior mutability?
-    // History: Arc<[ClipMeta]>
-    History: Vec<ClipMeta>
+    // history: Arc<[ClipMeta]>
+    history: Vec<ClipMeta>
 }
 // !------------------------------------------------------------
 // ClipMeta
@@ -43,6 +44,9 @@ pub struct ClipboardHistory {
 // #[derive(Clone, Debug, Eq, serde::Deserialize, serde::Serialize)]
 // #[serde(rename_all = "PascalCase")] // NO (?maybe?)
 // #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
+/// This is the meta data associated with a clipboard clip.
+/// This is serialized and points to the IDataObject (clip).
+/// The IDataObject may/will be stored independently as a Blob (or bytes).
 #[derive(Clone, Debug, Eq, Hash, Name, Ord, PartialOrd, Deserialize, Serialize)]
 pub struct ClipMeta {
     /// Unique auto-generated key (compliant)
@@ -151,9 +155,12 @@ impl DbApi for ClipMeta {
         // client?
         // Ok(client)
     }
+
+    #[allow(unused_mut, unused_variables)] // temp
     fn db_disconnect(mut client: Self::DbClient) -> Result<bool, Self::DbError> { // dyn postgres::Error
         Ok(true)
     }
+    
     fn db_execute(&self, mut client: Self::DbClient, query: &str, params: &[&(dyn ToSql + Sync)]) -> Result<u64, Self::DbClientError> {
             let results = client.execute(
                 query,
@@ -161,17 +168,18 @@ impl DbApi for ClipMeta {
             )?;
             Ok(results)
     }
+    #[allow(unused_mut, unused_variables)] // temp
     fn db_exists(&self, mut client: Self::DbClient) -> Result<bool, Self::DbError> { // dyn postgres::Error
         Ok(true)
     }    
 }
 // !------------------------------------------------------------
 impl DbCrud for ClipMeta {
-    // type DbClient = postgres::Client;
-    // type DbError = postgres::Error;
+    type DbClient = postgres::Client;
+    type DbError = postgres::Error;
     type DbRow = postgres::row::Row;
     //
-    fn db_row_insert(&self, mut client: Self::DbClient) -> Result<u64, Self::DbError> {
+    fn db_row_insert(&self, mut client: <Self as DbCrud>::DbClient) -> Result<u64, <Self as DbCrud>::DbError> {
         let results = client.execute(
             "INSERT INTO clip_data (id_key, id_system, data_creation_time, data_processed, data_synced, sequence_number, data_type, clip_data, clip_i_data) VALUES VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
             &[
@@ -193,7 +201,7 @@ impl DbCrud for ClipMeta {
         // Ok(results)
         results
     }
-    fn db_row_delete(&self, mut client: Self::DbClient) -> Result<u64, Self::DbError> {
+    fn db_row_delete(&self, mut client: <Self as DbCrud>::DbClient) -> Result<u64, <Self as DbCrud>::DbError> {
         let results = client.execute(
             "INSERT INTO clip_data (id_key, id_system, data_creation_time, data_processed, data_synced, sequence_number, data_type, clip_data, clip_i_data) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
             &[
@@ -210,7 +218,7 @@ impl DbCrud for ClipMeta {
         )?;
         Ok(results)
     }
-    fn db_row_get(row: Self::DbRow) -> Result<u64, Self::DbError> {
+    fn db_row_get(row: Self::DbRow) -> Result<u64, <Self as DbCrud>::DbError> {
         let clip_meta = ClipMeta {
             id_key: row.get("id_key"),
             id_system: row.get("id_system"),
@@ -224,7 +232,7 @@ impl DbCrud for ClipMeta {
         };
         Ok(1)
     }
-    fn from__row(row: Self::DbRow) -> Self {
+    fn from_row(row: Self::DbRow) -> Self {
         // db_row_get(row);
         ClipMeta {
             id_key:             row.get(0),
@@ -239,12 +247,16 @@ impl DbCrud for ClipMeta {
         }
     }
 
-    fn db_row_update(&self, mut client: Self::DbClient) -> Result<u64, Self::DbError> {
+    #[allow(unused_mut, unused_variables)] // temp
+    fn db_row_update(&self, mut client: <Self as DbCrud>::DbClient) -> Result<u64, <Self as DbCrud>::DbError> {
         // todo!() define db row update
+        // let debug_output = format!("client:\n {:#?}", client);
+        // println!("{}", debug_output);
         Ok(1)
     }
 
-    fn db_row_exists(&self, mut client: Self::DbClient) -> Result<bool, Self::DbError> {
+    #[allow(unused_mut, unused_variables)] // temp
+    fn db_row_exists(&self, mut client: <Self as DbCrud>::DbClient) -> Result<bool, <Self as DbCrud>::DbError> {
         // todo!() define db row exists
         Ok(true)
     }
@@ -262,8 +274,9 @@ impl DbJson for ClipMeta {
     }
     // fn load_json(file_path: &mut String) -> Self {
     fn load_json(mut file_path: String) -> Self {
-            if file_path.is_empty() {
-            let file_path = "ClipboardData.txt";
+        if file_path.is_empty() {
+            file_path = "ClipboardData.txt".to_string();
+            // let file_path = "ClipboardData.txt";
         }
         let clip_json = std::fs::read_to_string(file_path).unwrap();
         if clip_json.is_empty() {

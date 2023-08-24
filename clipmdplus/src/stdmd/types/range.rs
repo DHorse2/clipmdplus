@@ -11,9 +11,12 @@ use serde::{
 //
 // use serde_json::{Deserializer, Serializer, Value};
 use std::fmt;
+/// A trivial range object.
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Range {
+    /// The start.
     pub start: i32,
+    /// The end.
     pub end: i32,
 }
 impl Default for Range {

@@ -1,7 +1,10 @@
 // i_data_object IDataObject
-#[allow(dead_code, unused, unused_imports)] // object creation (pre debug)
+// #![allow(dead_code, unused_imports, unused_variables)]
 // !------------------------------------------------------------
 // , PartialEq need manual implementation
+/// The IDataOject represent raw clipboard data return by the OS.
+/// This value's length is highly variable.
+/// Length can vary from a byte to mega or gibabytes potentially.
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct IDataObject {
     // &[u8]/Vec<u8>/[u8; N]	postgres::types::Type::BYTEA 
