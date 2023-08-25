@@ -2,9 +2,9 @@
 An extended clipboard with history
 
 About:
-(Dave) I have a DotNet C# background and a few applications.
-I have a beta C# based Windows clipboard whose main feature is extracting all links automatically.
-It's really handly on top of a history with categories and edit functionality. That's the goal.
+Hi this Dave, I have a DotNet C# background and a few applications.
+So I needed to do a project and I already had a beta C# based Windows clipboard whose main feature is extracting all links automatically.
+It was really handly if it's on top of a history with categories and edit functionality. That's the goal here.
 
 Explaining that I'm doing direct code conversion hopely will help make what's here more coherent.
 Importantly! This is my first full project; I'm a student. There is err... left over code from exercises I did.
