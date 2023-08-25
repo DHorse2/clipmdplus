@@ -8,8 +8,20 @@
 )]
 //! doc for ClipMdPlus main
 //! Normal crate documentation goes here.
-//! Sample to follow:
+//! 
+//! todo Design note. Move utility modules and macros to lib.
+//! todo Features could be used to optimize compile time like they did.
+//! Features are: OS (required?), History, Clipboard (no hist), Window, ProcMacros.
+//! At lower detail level WindowTypes (ie egui, web), Specific macros and
+//! crates could all be easily excluded in a clear (to the dev) manner.
+//! It's a discussion topic for later releases.
+//! 
+//! The next Project Phase Task is connect to Windows (known) 
+//! and then Linux (new to me) clipboards.
 //!
+//! As to documentation standards, again follow the derive_more crate. 
+//! Sample to follow from the derive_more crate:
+//!------------------------------------------------------------
 //! ## Feature flags
 //! 
 //! # `clipmdplus`
