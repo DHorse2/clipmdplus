@@ -14,10 +14,10 @@ GOALS:
 1. I am evaluating how to convert idiomatic C# to idomatic RUST although other languages (2) are important personally.
 Note: This is the TL;DR explanation.
 2. I want this little clipboard to have the power of code and data conversion libraries I have in C# and PICK at a minimum as I need it. So perhaps open source them.
-3. In achiving that I will be able to automagically covert a rather large proprieatary app I own. The library attached to the clipboard is what's important.
-4. Have fun. I hope, time allowing, to be able to:
+3. In achiving that I will be able to automagically covert a rather large proprieatary app I own. The library attached to the clipboard is what's important. The snipets, widgets, add-ins (what have you) that could manipulate clipboard text. This has use cases outside of developers.
+4. Have fun. I'm really enjoying learning rust. I hope..., time allowing (I gotta eat LOL), be able to:
 5. Create a styling guide for C# (and so the .net languages), a discussion in the community and possibly including design patterns.
-
+6. RUST is going to be a first class language at Microsoft in my view. This uses (trivally) their extensive OS crates (not the UI).
 
 THE COMMUNITY:
 * Any power user appreciates having a good clipboard.
