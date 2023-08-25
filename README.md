@@ -2,18 +2,18 @@
 An extended clipboard with history
 
 About:
-Hi this Dave, I have a DotNet C# background and a few applications.
+Hi this is Dave, I have a DotNet C# background and a few applications.
 So I needed to do a project and I already had a beta C# based Windows clipboard whose main feature is extracting all links automatically.
-It was really handly if it's on top of a history with categories and edit functionality. That's the goal here.
+It was really handly if that's on top of a history and with categories and edit functionality. That's the goal here.
 
-Explaining that I'm doing direct code conversion hopely will help make what's here more coherent.
+By explaining that I'm doing direct code conversion, it will hopely help make what's here more coherent.
 Importantly! This is my first full project; I'm a student. There is err... left over code from exercises I did.
 Apologies. I'll clean it up and would really appreciate any sort of code review.
 
 GOALS:
 1. I am evaluating how to convert idiomatic C# to idomatic RUST although other languages (2) are important personally.
 Note: This is the TL;DR explanation.
-2. I want this little clipboard to have the power of code and data conversion libraries I have in C# and PICK at a minimum as I need it.
+2. I want this little clipboard to have the power of code and data conversion libraries I have in C# and PICK at a minimum as I need it. So perhaps open source them.
 3. In achiving that I will be able to automagically covert a rather large proprieatary app I own. The library attached to the clipboard is what's important.
 4. Have fun. I hope, time allowing, to be able to:
 5. Create a styling guide for C# (and so the .net languages), a discussion in the community and possibly including design patterns.
