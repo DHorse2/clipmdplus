@@ -27,4 +27,4 @@ THE COMMUNITY:
 * There are other people and publishers (businesses) like myself wanting to move to RUST. It adds adoption?
 * I'd like to know how OS interaction with Linux and Windows both an option. What is idiomatic cross-platform coding?
 
-Enjoy! Dave H.
+For Séamus. Enjoy! Dave H.
