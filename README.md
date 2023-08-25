@@ -1,10 +1,10 @@
 # clipmdplus
-An extended clipboard with history
+An extended clipboard with history (under development)
 
 About:
 Hi this is Dave, I have a DotNet C# background and a few applications.
-So I needed to do a project and I already had a beta C# based Windows clipboard whose main feature is extracting all links automatically.
-It was really handly if that's on top of a history and with categories and edit functionality. That's the goal here.
+So I needed to do a first RUST project and I already had ***a beta C# based Windows clipboard*** whose main feature is extracting all links automatically.
+It was really handly ***if*** that's on top of a history and with categories and edit functionality that would be great. That's the goal here.
 
 By explaining that I'm doing direct code conversion, it will hopely help make what's here more coherent.
 Importantly! This is my first full project; I'm a student. There is err... left over code from exercises I did.
