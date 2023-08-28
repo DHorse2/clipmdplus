@@ -13,6 +13,7 @@
 ///     VariantName
 ///     
 
+// #![recursion_limit = "128"]
 // derive_name macros
 use lazy_static::lazy_static;
 // proc_macro

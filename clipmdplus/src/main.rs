@@ -211,12 +211,25 @@
 //     // #![doc = document_features::document_features!()]
 // )]
 // !------------------------------------------------------------
+
+// Crates:
 // extern crate clipmdplus;
 // extern crate clipmdplus_library;
 // #[macro_use]
 // extern crate clipmdplus_macro;
 // extern crate derive_more;
 // !------------------------------------------------------------
+
+// Documentation Usage:
+// inline
+// Used to inline docs, instead of linking out to separate page.
+// #[doc(inline)]
+// no_inline
+// Used to prevent linking out to separate page or anywhere.
+// Example from libcore/prelude:
+// #[doc(no_inline)]
+// !------------------------------------------------------------
+
 // #[allow(unused_imports)]
 // #[macro_use]
 extern crate clipmdplus_macro;
@@ -232,26 +245,33 @@ extern crate clipmdplus_library;
 use clipmdplus_library::*;
 // pub use clipmdplus_library::imafunc;
 
-// #[doc(hidden)]
+/// todo Note (again) these should be library features.
+/// Derive more has many features and is idiomatic.
+/// It compliments an abstraction layer.
 // #[macro_use]
 extern crate derive_more;
+#[doc(hidden)]
 pub use derive_more::*;
 
 /// Design: A clipboard history should not have a UI,
 /// a UI uses the history. It's always running.
-/// Ideally the current clip should be independent of
+/// Ideally the current clip should be (in the lib and) independent of
 /// the history, which itself should be optional,
 /// or just live for the current session.
+/// That covers the use cases at a this level.
 pub mod clip_util;
 pub use self::clip_util::*;
 
 /// The window and form.
 /// todo some design notes re the form.
+/// Having an abstract form might have API advantanges.
 pub mod clip_form;
 pub use self::clip_form::*;
 
 /// Application specific standard library.
-/// NOT std.
+/// NOT std. This is application level cross-cutting abstractions.
+/// In our case, clipboards have a rich variety of data types.
+/// Error types are another example. Traits. Basically ".\Common\".
 pub mod stdmd;
 pub use self::stdmd::*;
 

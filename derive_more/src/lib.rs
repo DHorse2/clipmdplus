@@ -1,4 +1,16 @@
 //! # `derive_more`
+//! (Dgh: Developer's Note: macro usage and extending this crate.)
+//! create_derive! macro usage:
+//! create_derive!(Feature, Module, Trait, FunctionName, TraitAttributes, *)
+//! Feature, Module, Trait, FunctionName, TraitAttributes, *
+//! Example:
+//! #[cfg(feature = "as_ref")]
+//! mod as_ref;
+//! create_derive!("as_ref", as_ref, AsRef, as_ref_derive, as_ref);
+//! This crate could be forked to add Name and VariantName.
+//! Note: The usage of features optimizes compile time.
+//! 
+//! The original dommentation continues now continues:
 //!
 //! [![Build Status](https://github.com/JelteF/derive_more/workflows/CI/badge.svg)](https://github.com/JelteF/derive_more/actions)
 //! [![Latest Version](https://img.shields.io/crates/v/derive_more.svg)](https://crates.io/crates/derive_more)
@@ -280,7 +292,9 @@ impl Output for Result<proc_macro2::TokenStream, ParseError> {
 }
 
 macro_rules! create_derive(
-    ($feature: literal, $mod_: ident, $trait_: ident, $fn_name: ident $(,$attribute: ident)* $(,)?) => {
+    // Module, Trait, FunctionName, TraitAttributes, *
+    ($feature: literal, $mod_: ident, $trait_: ident, $fn_name: ident $(,$attribute: ident)* $(,)?) => 
+        {
         #[cfg(feature = $feature)]
         #[proc_macro_derive($trait_, attributes($($attribute),*))]
         #[doc(hidden)]
@@ -291,6 +305,7 @@ macro_rules! create_derive(
     }
 );
 
+// Feature, Module, Trait, FunctionName, TraitAttributes, *
 create_derive!("from", from, From, from_derive, from);
 
 create_derive!("into", into, Into, into_derive, into);
