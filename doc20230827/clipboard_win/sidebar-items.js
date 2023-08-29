@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["get","get_clipboard","get_clipboard_string","set","set_clipboard","set_clipboard_string","with_clipboard","with_clipboard_attempts"],"mod":["formats","raw"],"struct":["Clipboard"],"trait":["Getter","Setter"],"type":["SysResult","SystemError"]};

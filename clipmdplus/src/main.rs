@@ -275,11 +275,17 @@ pub use self::clip_form::*;
 pub mod stdmd;
 pub use self::stdmd::*;
 
+// Note: tokio:
+// To use the multi-threaded runtime, the macro can be configured using
+// #[tokio::main(flavor = "multi_thread", worker_threads = 10)]
+// #[tokio::main]
+// Error: proc macro `main` not expanded: proc macro crate is missing dylib
+
 /// Function main (bin) for ClipMdPlus.
 /// Loads the clipboard history.
 /// Opens the form(s).
-#[tokio::main]
 #[warn(unused_mut)]
+#[tokio::main]
 pub async fn main() -> Result<(), reqwest::Error> {
     // trace_macros!(true);
     // println!("Hello, world!");

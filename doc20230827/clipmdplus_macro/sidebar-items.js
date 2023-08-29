@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"derive":["Deserialize_enum","Name","NamingStyle","Serialize_enum","ToString","VariantName"]};
