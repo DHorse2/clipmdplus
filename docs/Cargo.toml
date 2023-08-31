@@ -1,0 +1,15 @@
+[package]
+name = "docs"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+### app dependencies
+# clipmdplus = { workspace = true }
+clipmdplus_macro = { workspace = true }
+# clipmdplus_macro = {version = "0.1.0", workspace = true, path = "..\\clipmdplus_macro" }
+clipmdplus_library = { workspace = true }
+derive_more = { workspace = true }
+# docs = { workspace = true }

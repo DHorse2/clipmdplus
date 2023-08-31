@@ -71,7 +71,7 @@ pub struct ClipMeta {
     pub data_type: String,
     /// Internal (this) clipboard data
     /// This is an object.
-    /// In rust an : Arc<Box<dyn Any>>,
+    /// In rust an : ``` Arc<Box<dyn Any>>, ```
     pub clip_data: Option<String>, // mocked without deserializer
     /// Clipboard data object
     /// this is the OS object of Format Type

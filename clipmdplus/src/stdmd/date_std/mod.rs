@@ -33,12 +33,15 @@ pub struct DataCreationTime {
     // SystemTime
     /// The data being stored. There are several type options.
     /// The first in this list was chosen.
+    /// ```
     ///     pub datetimesystem: Option<SystemTime>,
     ///     pub datetimeutc: Option<chrono::NaiveDateTime>,
     ///     pub datetimeutc: Option<chrono::DateTime<Utc>>,
     ///     pub datetimeutc: DateTime<Utc>,
     ///     datetimelocal: chrono::DateTime<Local>,
     ///     datetimeutc: Type::DateTime,
+    /// ```
+    /// 
     pub datetimesystem: Option<SystemTime>,
 }
 impl Eq for DataCreationTime {}

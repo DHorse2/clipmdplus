@@ -1,0 +1,4 @@
+// Just the clipboard form.
+cargo doc --no-deps --workspace --bins --document-private-items
+// The clipboard library.
+cargo doc --no-deps --workspace --document-private-items

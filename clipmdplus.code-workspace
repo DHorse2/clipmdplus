@@ -10,6 +10,9 @@
 			".\\Cargo.toml",
 			".\\Cargo.toml",
 			".\\clipmdplus_library\\Cargo.toml",
+			".\\clipmdplus\\docs\\Cargo.toml",
+			".\\clipmdplus\\docs\\Cargo.toml",
+			".\\clipmdplus\\docs\\Cargo.toml",
 			".\\clipmdplus\\docs\\Cargo.toml"
 		]
 	}

@@ -92,7 +92,7 @@ pub enum DbError {
     // Deserialize(#[from] String), 
 
     /// #[error(transparent)]
-    /// StdIoError(#[from] std::io::Error),
+    /// StdIoError(std::io::Error),
     StdIoError(DbErrorDataIo),
 
     /// #[error("json error {JsonErrorData}")]
@@ -177,7 +177,7 @@ pub enum JsonError {
     #[error("serde json error {0:?}")]
     Serde(DbErrorData), // serde_json::Error
     // An error of unknown type or orgin.
-    /// Unknown {#[from]  data: String },
+    /// Unknown {data: String },
     #[error("unknown error {0:?}")]
     Unknown(String),
 }

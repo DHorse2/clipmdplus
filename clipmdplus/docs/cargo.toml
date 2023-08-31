@@ -1,0 +1,12 @@
+[package]
+### App clipmdplus
+name = "docs"
+version = "0.1.0"
+authors = ["David G Horsman <david_horsman@hotmail.com>"]
+# build = "build.rs"
+# documentation = "https://docs.rs/clipmdplus"
+edition = "2021"
+
+[[bin]]
+name = "docs"
+path = "..\\src\\main.rs"

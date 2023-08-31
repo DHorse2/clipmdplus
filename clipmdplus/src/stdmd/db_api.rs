@@ -58,7 +58,7 @@ impl DbType {
     fn as_str(&self) -> &str { crate::DbType::name() } // &self.name() // .enum_name()}
 }
 /// ! DpApi -------------------------------------------------------
-/// <DbClient> <DbRow> DbApi DbCrud
+/// DbClient - DbRow - DbApi - DbCrud
 /// The DbApi trait defines a simplified interface for database access.
 /// It was created to mirror idiomatic C# as idomatic RUST.
 /// Specifically an existing C# app is rewritten here in Rust.
