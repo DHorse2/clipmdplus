@@ -1,18 +1,20 @@
 // stdmd app_error_data.rs
 // no use statements (included)
 // !------------------------------------------------------------
+// #[derive(Debug, Name, Deserialize, Serialize)]
 /// DbErrorData. This it temporay.
 /// It evolved to this mess from a logging experiment.
-// #[derive(Debug, Name, Deserialize, Serialize)]
-#[derive(Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize, /* ... */)]
+#[derive(
+    Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize /* ... */,
+)]
 pub struct DbErrorData {
-     message: String,
-     file: Option<String>,
-     line: Option<u32>,
-     column: Option<u32>,
-     stack: Option<Vec<String>>
+    message: String,
+    file: Option<String>,
+    line: Option<u32>,
+    column: Option<u32>,
+    stack: Option<Vec<String>>,
 }
-impl DbErrorData{
+impl DbErrorData {
     /// Creates a new empty DbErrorData.
     pub fn new(message: &str) -> Self {
         DbErrorData {
@@ -33,32 +35,46 @@ impl fmt::Display for DbErrorData {
 // !------------------------------------------------------------
 /// DbErrorDataIo
 // #[derive(Debug, Deserialize, Serialize)]
-#[derive(Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize, /* ... */)]
-pub struct DbErrorDataIo ( DbErrorData );
+#[derive(
+    Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize /* ... */,
+)]
+pub struct DbErrorDataIo(DbErrorData);
 /// DbErrorDataPostgres
 // #[derive(Debug, Deserialize, Serialize)]
-#[derive(Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize, /* ... */)]
-pub struct DbErrorDataPostgres ( DbErrorData );
+#[derive(
+    Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize /* ... */,
+)]
+pub struct DbErrorDataPostgres(DbErrorData);
 /// DbErrorDataStd
 // #[derive(Debug, Deserialize, Serialize)]
-#[derive(Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize, /* ... */)]
-pub struct DbErrorDataStd ( DbErrorData );
+#[derive(
+    Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize /* ... */,
+)]
+pub struct DbErrorDataStd(DbErrorData);
 /// DbErrorDataClient
 // #[derive(Debug, Deserialize, Serialize)]
-#[derive(Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize, /* ... */)]
-pub struct DbErrorDataClient ( DbErrorData );
+#[derive(
+    Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize /* ... */,
+)]
+pub struct DbErrorDataClient(DbErrorData);
 /// JsonErrorData
 // #[derive(Debug, Deserialize, Serialize)]
-#[derive(Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize, /* ... */)]
-pub struct JsonErrorData ( DbErrorData );
+#[derive(
+    Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize /* ... */,
+)]
+pub struct JsonErrorData(DbErrorData);
 /// DbErrorDataSer
 // #[derive(Debug, Deserialize, Serialize)]
-#[derive(Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize, /* ... */)]
-pub struct DbErrorDataSer ( DbErrorData );
+#[derive(
+    Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize /* ... */,
+)]
+pub struct DbErrorDataSer(DbErrorData);
 /// DbErrorDataDe
 // #[derive(Debug, Deserialize, Serialize)]
-#[derive(Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize, /* ... */)]
-pub struct DbErrorDataDe ( DbErrorData );
+#[derive(
+    Clone, Debug, From, Eq, Hash, Ord, PartialEq, PartialOrd, Deserialize, Serialize /* ... */,
+)]
+pub struct DbErrorDataDe(DbErrorData);
 
 // !------------------------------------------------------------
 // #[derive(Debug, Deserialize, Serialize)]

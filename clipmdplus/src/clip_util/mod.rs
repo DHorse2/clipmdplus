@@ -1,10 +1,14 @@
-// clip_util mod.rs
 #![allow(dead_code, unused_imports, unused_variables)]
-// #[cfg(debug_assertions)]
 #![cfg_attr(debug_assertions, allow(dead_code, unused_imports))]
-/// Clipboard ClipUtil module
-/// Early development
-
+// #[cfg(debug_assertions)]
+/// The clipboard history UI
+/// Design: A clipboard history should not neccesarily have a UI,
+/// The UI uses the history when it is running. 
+/// THe history is always running in order to capture clipboard events.
+/// Ideally the current clip should be (in the lib and) independent of
+/// the history, which itself should be optional
+/// or just live for the current session.
+/// That covers the use cases at a this level.
 use blob::Blob;
 //
 extern crate chrono;

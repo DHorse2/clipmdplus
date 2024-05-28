@@ -6,15 +6,9 @@
     cfg_attr(doc, doc = ::document_features::document_features!())
     // #![doc = document_features::document_features!()]
 )]
-//! doc for ClipMdPlus main
+//! # doc for ClipMdPlus main
 //! Normal crate documentation goes here.
 //! 
-//! todo Design note. Move utility modules and macros to lib.
-//! todo Features could be used to optimize compile time like they did.
-//! Features are: OS (required?), History, Clipboard (no hist), Window, ProcMacros.
-//! At lower detail level WindowTypes (ie egui, web), Specific macros and
-//! crates could all be easily excluded in a clear (to the dev) manner.
-//! It's a discussion topic for later releases.
 //! 
 //! The next Project Phase Task is connect to Windows (known) 
 //! and then Linux (new to me) clipboards.
@@ -44,7 +38,7 @@
 //! extern crate clipmdplus;
 //! use clipmdplus::{ClipboardMeta};
 //!
-//! ! clipboard_meta: ClipboardMeta = ClipboardMeta::new();
+//! ! clipboard_meta: ClipboardMeta = ClipboardMeta::new(); 
 //! Clipmd!("Named")
 //! clipboard_meta: ClipboardMeta = Clipmd!("Named");
 //! 
@@ -57,83 +51,10 @@
 //! assert!(MyEnum::Nothing.to_string() == "nothing");
 //! ```
 //!
-//! ## The derivable traits
-//!
-//! Below are all the traits that you can derive using this library.
-//! Some trait derivations are so similar that the further documentation will only show a single one
-//! of them.
-//! You can recognize these by the "-like" suffix in their name.
-//! The trait name before that will be the only one that is used throughout the further
-//! documentation.
-//!
-//! It is important to understand what code gets generated when using one of the
-//! derives from this crate.
-//! That is why the links below explain what code gets generated for a trait for
-//! each group from before.
-//!
-//! You can use the [`cargo-expand`] utility to see the exact code that is generated
-//! for your specific type.
-//! This will show you your code with all macros and derives expanded.
-//!
-//! **NOTE**: You still have to derive each trait separately. So `#[derive(Mul)]` doesn't
-//! automatically derive `Div` as well. To derive both you should do `#[derive(Mul, Div)]`
-//!
-//! ### Conversion traits
-//!
-//! These are traits that are used to convert automatically between types.
-//!
-//! 1. [`From`]
-//! 2. [`Into`]
-//! 3. [`FromStr`]
-//! 4. [`TryInto`]
-//! 5. [`IntoIterator`]
-//! 6. [`AsRef`]
-//! 7. [`AsMut`]
-//!
-//! ### Formatting traits
-//!
-//! These traits are used for converting a struct to a string in different ways.
-//!
-//! 1. [`Display`-like], contains `Display`, `Binary`, `Octal`, `LowerHex`,
-//!    `UpperHex`, `LowerExp`, `UpperExp`, `Pointer`
-//!
-//! ### Error-handling traits
-//! These traits are used to define error-types.
-//!
-//! 1. [`Error`]
-//!
-//! ### Operators
-//!
-//! These are traits that can be used for operator overloading.
-//!
-//! 1. [`Index`]
-//! 2. [`Deref`]
-//! 3. [`Not`-like], contains `Not` and `Neg`
-//! 4. [`Add`-like], contains `Add`, `Sub`, `BitAnd`, `BitOr`, `BitXor`
-//! 5. [`Mul`-like], contains `Mul`, `Div`, `Rem`, `Shr` and `Shl`
-//! 3. [`Sum`-like], contains `Sum` and `Product`
-//! 6. [`IndexMut`]
-//! 7. [`DerefMut`]
-//! 8. [`AddAssign`-like], contains `AddAssign`, `SubAssign`, `BitAndAssign`,
-//!    `BitOrAssign` and `BitXorAssign`
-//! 9. [`MulAssign`-like], contains `MulAssign`, `DivAssign`, `RemAssign`,
-//!    `ShrAssign` and `ShlAssign`
-//!
-//! ### Static methods
-//!
-//! These don't derive traits, but derive static methods instead.
-//!
-//! 1. [`Constructor`], this derives a `new` method that can be used as a constructor.
-//!    This is very basic if you need more customization for your constructor, check
-//!    out the [`derive-new`] crate.
-//! 2. [`IsVariant`], for each variant `foo` of an enum type, derives a `is_foo` method.
-//! 3. [`Unwrap`], for each variant `foo` of an enum type, derives an `unwrap_foo` method.
-//!
 //! ## Generated code
 //!
 //! ## Installation
 //!
-//! This library requires Rust 1.36 or higher and it supports `no_std` out of the box.
 //! Then add the following to `Cargo.toml`:
 //!
 //! ```toml
@@ -211,15 +132,6 @@
 //     // #![doc = document_features::document_features!()]
 // )]
 // !------------------------------------------------------------
-
-// Crates:
-// extern crate clipmdplus;
-// extern crate clipmdplus_library;
-// #[macro_use]
-// extern crate clipmdplus_macro;
-// extern crate derive_more;
-// !------------------------------------------------------------
-
 // Documentation Usage:
 // inline
 // Used to inline docs, instead of linking out to separate page.
@@ -230,28 +142,13 @@
 // #[doc(no_inline)]
 // !------------------------------------------------------------
 
-// #[allow(unused_imports)]
+// Crates:
+// extern crate clipmdplus;
+// extern crate clipmdplus_library;
 // #[macro_use]
-extern crate clipmdplus_macro;
-pub use crate::clipmdplus_macro::Name;
-pub use crate::clipmdplus_macro::VariantName;
-// 
-pub use crate::clipmdplus_macro::Deserialize_enum;
-pub use crate::clipmdplus_macro::Serialize_enum;
-
-// #[macro_use]
-extern crate clipmdplus_library;
-#[allow(unused_imports)]
-use clipmdplus_library::*;
-// pub use clipmdplus_library::imafunc;
-
-/// todo Note (again) these should be library features.
-/// Derive more has many features and is idiomatic.
-/// It compliments an abstraction layer.
-// #[macro_use]
-extern crate derive_more;
-#[doc(hidden)]
-pub use derive_more::*;
+// extern crate clipmdplus_macro;
+// extern crate derive_more;
+// !------------------------------------------------------------
 
 /// Design: A clipboard history should not have a UI,
 /// a UI uses the history. It's always running.
@@ -259,8 +156,9 @@ pub use derive_more::*;
 /// the history, which itself should be optional,
 /// or just live for the current session.
 /// That covers the use cases at a this level.
-pub mod clip_util;
-pub use self::clip_util::*;
+// pub mod clip_util;
+pub use clipmdplus_lib::clip_util::*;
+// use clipmdplus_lib::clip_util::*;
 
 /// The window and form.
 /// todo some design notes re the form.
@@ -268,30 +166,34 @@ pub use self::clip_util::*;
 pub mod clip_form;
 pub use self::clip_form::*;
 
-/// Application specific standard library.
-/// NOT std. This is application level cross-cutting abstractions.
-/// In our case, clipboards have a rich variety of data types.
+// Application specific standard library.
+// NOT std. This is application level cross-cutting abstractions.
+// In our case, clipboards have a rich variety of data types.
 /// Error types are another example. Traits. Basically ".\Common\".
-pub mod stdmd;
-pub use self::stdmd::*;
+// pub mod stdmd;
+// pub use self::stdmd::*;
+pub use clipmdplus_lib::stdmd::*;
 
 // Note: tokio:
 // To use the multi-threaded runtime, the macro can be configured using
 // #[tokio::main(flavor = "multi_thread", worker_threads = 10)]
 // #[tokio::main]
 // Error: proc macro `main` not expanded: proc macro crate is missing dylib
+use tokio::net::TcpListener;
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 /// Function main (bin) for ClipMdPlus.
 /// Loads the clipboard history.
 /// Opens the form(s).
-#[warn(unused_mut)]
-#[tokio::main]
-pub async fn main() -> Result<(), reqwest::Error> {
+// pub async fn main() -> Result<(), reqwest::Error> {
+    #[warn(unused_mut)]
+// #[tokio::main]
+pub fn main() -> Result<(), reqwest::Error> {
     // trace_macros!(true);
     // println!("Hello, world!");
     // trace_macros!(false);
     let mut clip_form = clip_form::ClipForm::default();
-    let ui_type = stdmd::types::UiType::EguiNative;
+    let ui_type = UiType::EguiNative;
     let _clip_form_result = clip_form.run(ui_type);
     Ok(())
 }

@@ -69,7 +69,7 @@ where
     T: ?Sized
 {
     // let ty_name = format!("{}", std::any::type_name::<T>()).as_str();
-    let ty_name = std::any::type_name::<T>().clone();
+    let ty_name = std::any::type_name::<T>(); //.clone();
     // let result = ty_name.clone();
     ty_name
 }
@@ -85,7 +85,7 @@ where
     // TypeId::type_name::<T>
     // i.type_name::<I>()
     // &TypeId::of::<i<T>>().type_name()
-    let b: &'static str = i.type_id().type_name().clone(); // .to_string().as_str();
+    let b: &'static str = i.type_id().type_name(); //.clone(); // .to_string().as_str();
     b
 }
 /// Returns the TypeId of T.

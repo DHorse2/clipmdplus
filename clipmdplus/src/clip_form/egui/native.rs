@@ -23,7 +23,7 @@
 // use eframe::*;
 // use egui::*;
 //
-use crate::stdmd;
+use clipmdplus_lib::stdmd;
 // use stdmd::UiType;
 // use stdmd::UiError;
 // use stdmd::UiResult;

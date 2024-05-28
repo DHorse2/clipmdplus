@@ -10,3 +10,7 @@ edition = "2021"
 [[bin]]
 name = "docs"
 path = "..\\src\\main.rs"
+
+# [[lib]]
+# name = "docslib"
+# path = "..\\src\\lib.rs"

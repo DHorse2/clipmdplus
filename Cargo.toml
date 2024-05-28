@@ -11,9 +11,9 @@ members = [
 ##! ### Libary
     "clipmdplus_library",
 ##! ### Derive More Extension
-    "derive_more",
+    "derive_more"
 ##! ### Workspace Issue with docs.
-    "docs"
+    # "docs"
 ]
 ##! Workspace details
 ### The foo feature enables the `foo` functions
@@ -34,9 +34,9 @@ clipmdplus_macro = { version = "0.1.0", workspace = true, path = "./clipmdplus_m
 ### Traits
 clipmdplus_library = { version = "0.1.0", workspace = true, path = "./clipmdplus_library" }
 ### Docs
-docs = { version = "0.1.0", workspace = true, path = "./docs" }
+# docs = { version = "0.1.0", workspace = true, path = "./docs" }
 
-document-features = "0.2.7"
+document-features = "0.2.8"
 
 ##! Web interface
 # [workspace.metadata.webcontents]
@@ -44,8 +44,8 @@ document-features = "0.2.7"
 # root = "path/to/webproject"
 # tool = ["npm", "run", "build"]
 
-[workspace.metadata.docs.rs]
-features = ["document-features"]
+# [workspace.metadata.docs.rs]
+# features = ["document-features"]
 
 [workspace.metadata.features]
 Name = []

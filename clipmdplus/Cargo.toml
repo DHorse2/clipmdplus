@@ -17,7 +17,7 @@ license = "MIT"
 # license-file = "clipmdplus_license.txt"
 keywords = ["clipboard", "copy", "cut", "paste", "clippings", "ETL", "", "Linux"]
 readme = "README.md"
-# repository = ?
+repository = "https://github.com/DHorse2/clipmdplus"
 
 # version.workspace = true
 # authors.workspace = true
@@ -34,7 +34,7 @@ default-run = "clipmdplus"
 [lib]
 ### library clipmdplus_liby
 name = "clipmdplus_lib"
-proc-macro = true
+# proc-macro = true
 
 [[bin]]
 ### app bin clipmdplus
@@ -49,44 +49,45 @@ clipmdplus_macro = { workspace = true }
 # clipmdplus_macro = {version = "0.1.0", workspace = true, path = "..\\clipmdplus_macro" }
 clipmdplus_library = { workspace = true }
 derive_more = { workspace = true }
-docs = { workspace = true }
+# docs = { workspace = true }
+# docs = "0.0.0"
 
 blob = "0.3.0"
-chrono = {version = "0.4.26", features = ["serde"]}
-document-features = "0.2.7"
-libc = "0.2.146"
-postgres = "0.19.5"
+chrono = {version = "0.4.37", features = ["serde"]}
+document-features = "0.2.8"
+libc = "0.2.153"
+postgres = "0.19.7"
 # http / json
-reqwest = {version = "0.11.18", features = ["json"]}
+reqwest = {version = "0.12.2", features = ["json"]}
 
 # Serialization
-serde = {version = "1.0.164", features = ["derive", "rc"]}
+serde = {version = "1.0.197", features = ["derive", "rc"]}
 serde-enum = "0.1.4" 
-serde-enum-str = "0.3.2"
-serde_json = "1.0.97"
+serde-enum-str = "0.4.0"
+serde_json = "1.0.115"
 
 # System
 sled = "0.34.7"
 # sys = "0.0.0"
-thiserror = "1.0.40"
+thiserror = "1.0.58"
 # async
 lazy_static = "1.4.0"
-tokio = { version = "1.28.2", features = ["full"] }
+tokio = { version = "1.37.0", features = ["full"] }
 
 # UI start.
-egui = { version = "0.22.0"} 
+egui = { version = "0.27.1"} 
 # , features = ["provide_any"] }
 # enum_derive = "0" can't have payloads
-eframe = "0.22.0"
+eframe = "0.27.1"
 # egui_web = "0.17.0"
 # UI end.
 
 # Proc Macro
 # derive_more = "0.99.17"
 # derive-name = "0.1.2"
-proc-macro2 = "1.0.60"
-syn = "2.0.18"
-quote = "1.0.28"
+proc-macro2 = "1.0.79"
+syn = "2.0.57"
+quote = "1.0.35"
 
 # Windows:# OS
 # The Xml Dom will be used too. 

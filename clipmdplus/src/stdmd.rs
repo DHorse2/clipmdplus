@@ -1,7 +1,10 @@
-// stdmd.rs standard functions
+/// stdmd.rs standard functions
+/// Application specific standard library.
+/// It extends but is NOT std. This is application level cross-cutting abstractions.
+/// Clipboards have a rich variety of data types.
 
-/// A non-standard date time object
-/// that has future use.
+// A non-standard date time object
+// that has future use.
 pub mod date_std; // romove?
 pub use self::date_std::*;
 /// Internet, file, folder, email, phone and document links.

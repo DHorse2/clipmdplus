@@ -13,22 +13,22 @@ extern crate libc;
 use std::fmt; 
 use std::str;
 //
-use crate::UiType;
+use clipmdplus_lib::UiType;
 use crate::clip_form::egui::native::ClipFormEgui;
-use crate::clip_util::ClipMeta;
+use clipmdplus_lib::clip_util::ClipMeta;
 // use crate::clip_util::ClipboardMeta;
-use crate::clip_util::ProgControl;
+use clipmdplus_lib::clip_util::ProgControl;
 //
 // use crate::stdmd::hyperlink::HyperlinkMeta;
-use crate::stdmd::hyperlink::HyperlinkList;
-use crate::stdmd::range::Range;
+use clipmdplus_lib::stdmd::hyperlink::HyperlinkList;
+use clipmdplus_lib::stdmd::range::Range;
 // use crate::stdmd::types::UiType;
 // use crate::stdmd::types::UiError;
 // use crate::stdmd::types::UiResult;
 // use crate::stdmd::types::WindowType;
 // use crate::stdmd::types::WindowError;
 // use crate::stdmd::types::WindowResult;
-use crate::stdmd::sequence::Sequence;
+use clipmdplus_lib::stdmd::sequence::Sequence;
 /// The egui crate is used along with eframe to create the window.
 pub mod egui;
 //

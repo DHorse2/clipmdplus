@@ -21,6 +21,9 @@ use serde::Serialize;
 // Date Stuff
 
 // !------------------------------------------------------------
+/// A non-standard date time object
+/// that has future use.
+/// 
 /// DataCreationTime is a (currently unused) module's whose purpose is questionable.
 /// It is intended to handle non-standard date formats and serialization.
 /// todo review DataCreationTime

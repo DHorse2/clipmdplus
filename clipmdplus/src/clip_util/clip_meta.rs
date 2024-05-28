@@ -49,8 +49,10 @@ pub struct ClipboardHistory {
 /// The IDataObject may/will be stored independently as a Blob (or bytes).
 #[derive(Clone, Debug, Eq, Hash, Name, Ord, PartialOrd, Deserialize, Serialize)]
 pub struct ClipMeta {
-    /// Unique auto-generated key (compliant)
-    /// (This would have a getter/setter and not be public)
+    /// Note: From a DB view, the unique key is the combination of the
+    /// id_system and id_key. Date/time is virtually unique as well.
+    /// Unique auto-generated key (compliant) id
+    /// (This would have a getter/setter and not usually be public)
     pub id_key: u32,
     /// System Unique ID
     // Notes:

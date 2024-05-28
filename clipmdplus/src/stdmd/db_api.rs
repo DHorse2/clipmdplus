@@ -23,13 +23,13 @@ extern crate clipmdplus_macro;
 use clipmdplus_macro::Name;
 use clipmdplus_macro::VariantName;
 
-/// ! DbType -------------------------------------------------
-/// DbType enumerates the chosen database to use
+// DbType -------------------------------------------------
 // #[derive(Clone, Debug, VariantName, serde::Deserialize, serde::Serialize,  /* */ )] // derive_more::From, 
 // #[serde(rename_all = "snake_case")]
 // #[derive(Clone, derive_more::From, derive_name::VariantName, serde_enum::ToString, serde_enum::Deserialize_enum, serde_enum::Serialize_enum,  /* */ )]
 // , Serialize_enum_str, Deserialize_enum_str, )]
 // , From
+/// DbType enumerates the chosen database to use
 #[derive(Clone, Debug, From, Eq, Hash, Name, Ord, PartialEq, PartialOrd, VariantName, Deserialize, Serialize)]
 pub enum DbType {
     /// Json.
@@ -57,13 +57,13 @@ pub enum DbType {
 impl DbType {
     fn as_str(&self) -> &str { crate::DbType::name() } // &self.name() // .enum_name()}
 }
-/// ! DpApi -------------------------------------------------------
-/// DbClient - DbRow - DbApi - DbCrud
+// ! DpApi -------------------------------------------------------
 /// The DbApi trait defines a simplified interface for database access.
 /// It was created to mirror idiomatic C# as idomatic RUST.
 /// Specifically an existing C# app is rewritten here in Rust.
 /// It's somewhat intuitive where your database uses has a Type and Client.
 /// Custom error handling is supplied via DbError and DbClientError.
+// DbClient - DbRow - DbApi - DbCrud
 pub trait DbApi {
     /// The database type.
     type DbType;
@@ -83,8 +83,9 @@ pub trait DbApi {
     /// Check to see if the database exists.
     fn db_exists(&self, client: Self::DbClient) -> Result<bool, Self::DbError>;
 }
-/// ! DbCrud ------------------------------------------------------
+// ! DbCrud ------------------------------------------------------
 // CRUD
+/// Database CRUD insert, get (select), update, delete.
 pub trait DbCrud : DbApi {
     // The database type.
     // type DbType;
